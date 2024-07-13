@@ -1,4 +1,6 @@
 package com.example.pethealth.model;
 
-public class ShoppingCart {
+public class ShoppingCart extends BaseEntity {
+
+
 }

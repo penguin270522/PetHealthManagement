@@ -1,4 +1,23 @@
 package com.example.pethealth.model;
 
-public class Post {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+public class Post extends BaseEntity{
+    @Column(nullable = false, unique = false)
+    private String content;
+
+    @Column(nullable = false, unique = false)
+    private String title;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
