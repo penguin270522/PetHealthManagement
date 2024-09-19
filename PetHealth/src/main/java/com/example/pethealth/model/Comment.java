@@ -34,7 +34,7 @@ public class Comment {
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "parent_comment_id")
+    @JoinColumn(name = "parent_id")
     private Comment parentComment;
 
     @OneToMany(mappedBy = "parentComment", cascade = CascadeType.ALL)

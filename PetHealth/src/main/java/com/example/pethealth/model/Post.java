@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Post extends BaseEntity{
-    @Column(nullable = false, unique = false)
+    @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = false)
     private String title;
 
     @ManyToOne

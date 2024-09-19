@@ -28,7 +28,7 @@ public class User {
     private String username;
 
     @Column(nullable = false)
-    private String password; // Không cần unique
+    private String password;
 
     @ManyToOne
     @JoinColumn(name = "role_id")

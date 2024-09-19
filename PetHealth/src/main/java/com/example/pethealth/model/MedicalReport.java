@@ -11,12 +11,11 @@ import lombok.NoArgsConstructor;
 public class MedicalReport extends BaseEntity {
 
     @Column(nullable = false, unique = true)
-    //nullable = false -> not null
-    // unique = false -> only attribute
+
     private String code;
 
     @Column(nullable = true, unique = false)
-    private String petOwner; // luu tru ten nguoi nuoi pet
+    private String petOwner;
 
     @Column(nullable = true, unique = false)
     private String namePet;
