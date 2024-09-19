@@ -16,16 +16,7 @@ public class Collection {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @OneToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
-
-    @OneToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+   @Column
+   private String name;
 
 }

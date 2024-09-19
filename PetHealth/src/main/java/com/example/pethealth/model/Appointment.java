@@ -1,45 +1,44 @@
 package com.example.pethealth.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.example.pethealth.enums.AppointmentStatus;
+import jakarta.persistence.*;
+import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Appointment extends BaseEntity {
 
-    @Column(nullable = false, unique = true)
-    private String code;
+   @Column(nullable = false, unique = true) //nullable: false -> khong dc null
+   private String code;
 
-    @Column(nullable = false, unique = false)
-    private String petOwner;
+   @Column(nullable = false)
+   private String nameUser;
 
-    @Column(nullable = false, unique = false)
-    private String numberPhone;
+   @Column(nullable = false)
+   private String numberPhone;
 
-    @Column(nullable = false, unique = false)
-    private String namePet;
+   @Column(nullable = false)
+   private String namePet;
 
-    @Column(nullable = false, unique = false)
-    private Date appointmentDate;
+   @ManyToOne
+   @JoinColumn(name="type_pet_id")
+   private TypePet typePet;
 
-    @ManyToOne
-    @JoinColumn(name="type_id")
-    private TypePet typePet;
+   @Column(nullable = false)
+   private LocalDateTime startDate;
 
-    @ManyToOne
-    @JoinColumn(name = "pet_id")
-    private Pet pet;
+   @Enumerated(EnumType.STRING)
+   private AppointmentStatus appointmentStatus;
 
-
+   @PrePersist
+   public void generateRandomCode() {
+      this.code = UUID.randomUUID().toString();
+   }
 }

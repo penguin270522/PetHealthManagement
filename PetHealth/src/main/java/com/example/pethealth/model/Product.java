@@ -7,25 +7,26 @@ import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product extends BaseEntity {
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
-    @Column(unique = false, nullable = false)
-    private Date EXP;
+    @Column( nullable = false)
+    private LocalDateTime EXP;
 
-    @Column(unique = false, nullable = false)
-    private Date MFG;
+    @Column(nullable = false)
+    private LocalDateTime MFG;
 
-    @Column(unique = false, nullable = false)
+    @Column(nullable = false)
     private float price;
 
-    @Column(unique = false, nullable = false)
+    @Column(nullable = false)
     private String note;
 
     @ManyToOne
@@ -36,7 +37,6 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "type_product_id")
     private TypeProduct typeProduct;
 
-    @Column(unique = false, nullable = true)
+    @Column(nullable = false)
     private Long quantity;
-
 }
