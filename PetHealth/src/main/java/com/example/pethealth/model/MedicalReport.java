@@ -2,16 +2,20 @@ package com.example.pethealth.model;
 
 import com.example.pethealth.enums.GenderPet;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Random;
 
 @Entity
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class MedicalReport extends BaseEntity {
 
     @Column(nullable = false, unique = true)
@@ -43,19 +47,50 @@ public class MedicalReport extends BaseEntity {
     //symptom for pet
     private String symptom;
 
-    @Column(nullable = false, unique = false)
-    //diagnosed -> doctor writing for pet
+    @Lob
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String diagnosed;
-
+    @OneToOne
+    @JoinColumn(name = "appointment_id")
+    private Appointment appointment;
 
     @Column(nullable = true)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy HH:mm:ss")
     private LocalDateTime followSchedule;
 
     @ManyToOne
     @JoinColumn(name = "pet_id")
+    @JsonIgnore
     private Pet pet;
 
+    @OneToOne(mappedBy = "medicalReport")
+    private Prescription prescription;
+    @PrePersist
+    public void generateRandomCode() {
+        String letters = getRandomLetters(3);
+        String numbers = getRandomNumbers(4);
+        this.code = letters + numbers;
+    }
 
+    public static String getRandomLetters(int length) {
+        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        Random random = new Random();
+        StringBuilder result = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(alphabet.length());
+            result.append(alphabet.charAt(index));
+        }
+        return result.toString();
+    }
+
+    public static String getRandomNumbers(int length) {
+        String digits = "0123456789";
+        Random random = new Random();
+        StringBuilder result = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(digits.length());
+            result.append(digits.charAt(index));
+        }
+        return result.toString();
+    }
 
 }

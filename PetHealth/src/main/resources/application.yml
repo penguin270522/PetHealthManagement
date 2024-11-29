@@ -19,3 +19,9 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
 
+jwt:
+  signerKey: 6ZG//hTwi/qIlKEYUFUuiEnQPbZI16NTFn9WmZk0lqoVyvyldWc1eWElF13HIwb0
+  expiration: 2592000 #30 days = 30 * 24 * 60 * 60
+
+img:
+  avatarUser: b76b5735-800e-40c3-a3ef-f1250366ff06_136-1363971_author-image-logo-user-png
