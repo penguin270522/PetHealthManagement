@@ -6,9 +6,10 @@ import com.example.pethealth.exception.BadRequestException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
-
+@Component
 public class GetPageableUtil {
     public static Pageable getPageable(Map<String, String> params) {
         int page = EnvironmentConstant.PAGE_DEFAULT_INDEX;

@@ -22,5 +22,5 @@ public class Role {
     private String name;
 
     @Column(nullable = false, unique = true)
-    private String code; // Đảm bảo mã vai trò là duy nhất
+    private String code;
 }

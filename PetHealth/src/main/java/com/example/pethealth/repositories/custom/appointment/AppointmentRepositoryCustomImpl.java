@@ -1,7 +1,7 @@
 package com.example.pethealth.repositories.custom.appointment;
 
 import com.example.pethealth.constant.QueryConstant;
-import com.example.pethealth.dto.SimpleResponese;
+import com.example.pethealth.dto.outputDTO.SimpleResponese;
 import com.example.pethealth.model.Appointment;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -45,10 +45,9 @@ public class AppointmentRepositoryCustomImpl implements AppointmentRepositoryCus
 
     private String buildQueryFilter(Map<String,String> params){
         StringBuilder sql = new StringBuilder(QueryConstant.SELECT_FROM_APPOINTMENT).append(QueryConstant.WHERE_ONE_EQUAL_ONE);
-        sql = builderSQLCommon(params,sql);
+        builderSQLCommon(params, sql);
         return sql.toString();
     }
-
 
 
     private int coutTotalItem(Map<String , String > prams){
@@ -77,6 +76,16 @@ public class AppointmentRepositoryCustomImpl implements AppointmentRepositoryCus
     private StringBuilder builderSQLCommon(Map<String , String> params , StringBuilder sql){
         String statusAppointment = params.get("status");
         String nameUser = params.get("nameUser");
+        String doctor = params.get("doctorId");
+        String fromDay = params.get("fromDay");
+        String toDay = params.get("toDay");
+        if (fromDay != null && !fromDay.isEmpty() && toDay != null && !toDay.isEmpty()) {
+            sql.append(" and a.start_date BETWEEN '")
+                    .append(fromDay)
+                    .append("' AND '")
+                    .append(toDay)
+                    .append("' ");
+        }
         if(statusAppointment != null){
             if(!statusAppointment.isEmpty()){
                 sql.append(String.format(" and a.appointment_status = '%s'",statusAppointment));
@@ -84,6 +93,9 @@ public class AppointmentRepositoryCustomImpl implements AppointmentRepositoryCus
         }
         if (nameUser != null && !nameUser.isEmpty()) {
             sql.append(String.format(" AND a.name_user LIKE '%%%s%%'", nameUser));
+        }
+        if(doctor != null && !doctor.isEmpty()){
+            sql.append(String.format(" And a.doctor_id = '%s'", doctor));
         }
         return sql;
     }

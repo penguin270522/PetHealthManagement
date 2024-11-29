@@ -2,6 +2,7 @@ package com.example.pethealth.model;
 
 import com.example.pethealth.enums.AppointmentStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,6 +24,8 @@ public class Appointment extends BaseEntity {
    @Column(nullable = false)
    private String nameUser;
 
+   private String replayAppointment;
+
    @Column(nullable = false)
    private String numberPhone;
 
@@ -39,6 +42,26 @@ public class Appointment extends BaseEntity {
 
    @Enumerated(EnumType.STRING)
    private AppointmentStatus appointmentStatus;
+
+   @ManyToOne
+   @JoinColumn(name = "doctor_id")
+   @JsonIgnore
+   private User doctorInCharge;
+
+   @ManyToOne
+   @JoinColumn(name = "pet_id")
+   @JsonIgnore
+   private Pet pet;
+
+   @OneToOne(mappedBy = "appointment")
+   private MedicalReport medicalReport;
+
+   private String message;
+
+   @ManyToOne
+   @JoinColumn(name = "service_id")
+   @JsonIgnore
+   private ServiceMedical serviceMedical;
 
    @PrePersist
    public void generateRandomCode() {
