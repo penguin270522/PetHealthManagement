@@ -1,0 +1,74 @@
+<div class="body-profile flex">
+  <div class="setting-profile w-[20%] h-screen bg-white border border-gray-300 p-4 ">
+    <div class="">
+      <div class="flex justify-center">
+        <img class="w-14 h-14 rounded-full ml-4" [src]="urlImageAvatarUser" alt="">
+      </div>
+      <div class="flex justify-center pt-2">
+        <span class = "text-center font-bold">Hoàng Phi Hùng</span>
+      </div>
+    </div>
+    <div class="pt-2 m-2">
+      <ul class = "p-2">
+        <li class = "p-2 text-sm hover:bg-gray-200  flex items-center rounded-lg"><ion-icon name="person-outline"  class="pr-2 h-[20px] w-[20px] items-center justify-between"></ion-icon>Tài Khoản</li>
+        <li class = "p-2 text-sm hover:bg-gray-200  flex items-center rounded-lg"><ion-icon name="key-outline" class="pr-2 h-[20px] w-[20px] items-center justify-between"></ion-icon>Thay đổi mật khẩu</li>
+        <li class = "p-2 text-sm hover:bg-gray-200  flex items-center rounded-lg"><ion-icon name="notifications-outline" class="pr-2 h-[20px] w-[20px] items-center justify-between"></ion-icon>Thông báo</li>
+      </ul>
+    </div>
+  </div>
+  <div class ="content-profile w-[80%] border border-gray-300 flex flex-col items-center p-4">
+    <div class="title-profile ">
+        <span class="font-bold text-[18px]">Chỉnh sửa trang cá nhân</span>
+    </div>
+    <div class="image-profile bg-gray-300 w-[60%] h-[12%] mt-10 rounded-2xl flex items-center justify-between">
+      <div class="flex">
+        <img class="w-14 h-14 rounded-full ml-4" [src]="urlImageAvatarUser" alt="">
+        <div class="pl-4">
+          <span class="font-bold">Hoàng Phi Hùng<br></span>
+          <span class ="text-sm">Hoàng Phi Hùng</span>
+        </div>
+      </div>
+      <div class="update-image mr-4 bg-blue-600 w-[12%] h-[35%] rounded-xl flex justify-center items-center hover:bg-blue-500" (click)="selectFile()">
+        <input type="file" id="file-input" class="hidden" (change)="onFileChange($event)" accept="image/*" />
+        <button type="button" class="flex items-center justify-center w-full h-full transition-transform transform active:scale-95">
+            <span class="text-white text-center">Đổi ảnh</span>
+        </button>
+      </div>
+    </div>
+    <div class="edit-profile mt-6 w-[80%] border border-black rounded-2xl p-2">
+      <span class = "ml-4 font-medium ">Chỉnh sửa thông tin</span>
+      <div class="">
+        <form action="">
+          <div class="row flex items-center justify-between">
+            <div class="flex flex-col m-2">
+              <label class ="mb-2 text-sm font-sans" for="">Họ và tên:</label>
+              <input type="text" name="" id="" class="bg-slate-200 rounded-lg pl-2 h-8" placeholder="nhập tên người dùng">
+            </div>
+            <div class="flex flex-col m-2">
+              <label class ="mb-2 text-sm font-sans" for="">Ngày sinh :</label>
+              <input type="datetime-local" name="" id="" class="bg-slate-200 rounded-lg pl-2 h-8" placeholder="nhập thông tin">
+            </div>
+            <div class="flex flex-col m-2">
+              <label class ="mb-2 text-sm font-sans" for="">Địa chỉ :</label>
+              <input type="text" name="" id="" class="bg-slate-200 rounded-lg pl-2 h-8" placeholder="địa chỉ">
+            </div>
+          </div>
+          <div class="row flex items-center justify-between">
+            <div class="flex flex-col m-2">
+              <label class ="mb-2 text-sm font-sans" for="">Tên người dùng :</label>
+              <input type="text" name="" id="" class="bg-slate-200 rounded-lg pl-2 h-8" placeholder="nhập tên người dùng">
+            </div>
+            <div class="flex flex-col m-2">
+              <label class ="mb-2 text-sm font-sans" for="">Ngày sinh :</label>
+              <input type="datetime-local" name="" id="" class="bg-slate-200 rounded-lg pl-2 h-8" placeholder="nhập thông tin">
+            </div>
+            <div class="flex flex-col m-2">
+              <label class ="mb-2 text-sm font-sans" for="">Địa chỉ :</label>
+              <input type="text" name="" id="" class="bg-slate-200 rounded-lg pl-2 h-8" placeholder="địa chỉ">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

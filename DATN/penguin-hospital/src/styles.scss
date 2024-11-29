@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Thay đổi kích thước và màu sắc thanh cuộn */
+::-webkit-scrollbar {
+  width: 8px; /* Chiều rộng của thanh cuộn */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Màu sắc của thanh cuộn */
+  border-radius: 4px; /* Bo tròn các góc */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Màu sắc khi di chuột qua */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Màu sắc của track */
+}
+
+.menu {
+  position: fixed; /* Đảm bảo rằng thuộc tính này đã được thêm */
+  top: 0; /* Vị trí cố định từ trên cùng */
+  height: 100vh; /* Chiều cao đầy đủ của viewport */
+}
+
+input[type="number"].no-spinner::-webkit-outer-spin-button,
+input[type="number"].no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"].no-spinner {
+  -moz-appearance: textfield;
+}

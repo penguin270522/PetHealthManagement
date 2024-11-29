@@ -1,0 +1,251 @@
+<div class="w-[100%]">
+  <div class="content-1 w-[100%] flex items-center pb-2 border-b-2">
+    <div class="w-[20%] flex justify-center">
+      <button (click)="closeChosePicture()"><img *ngIf="petDetails?.urlImagePet" [src]="petDetails.urlImagePet" class="w-[120px] rounded-full h-[120px] object-cover transition-transform transform active:scale-95" alt=""></button>
+    </div>
+    <div class="content-pet w-[80%]">
+      <div class="edit w-[100%]">
+        <button (click)="toggleEdit()" class="float-end">
+          <div class="flex items-center space-x-1">
+            <ion-icon name="brush-outline"></ion-icon>
+            <span class="font-sans text-gray-900 text-[14px]">Sửa thông tin</span>
+          </div>
+        </button>
+      </div>
+      <form [formGroup]="updatePetForm">
+        <div class="grid grid-cols-4 w-[100%]">
+          <span class="font-sans text-gray-900 p-2 text-[14px] inline-flex items-center gap-1">Tên:         <input type="text" [value]="petDetails.namePet" [disabled]="isDisabled" class="text-gray-500 bg-white w-[50%]" *ngIf="showCrystal"/> <input formControlName="name" type="text" name="" id="" class="text-gray-500 bg-white w-[50%]" *ngIf="showEditCrystal"></span>
+          <span class="font-sans text-gray-900 p-2 text-[14px] inline-flex items-center gap-1">Tuổi:        <input type="text" *ngIf="petDetails?.oldPet" [value]="petDetails.oldPet" [disabled]="isDisabled" class="text-gray-500 bg-white w-[50%]"/></span>
+          <span class="font-sans text-gray-900 p-2 text-[14px] inline-flex items-center gap-1">Giới tính:
+            <select formControlName="genderPet" *ngIf="showEditCrystal">
+              <option value="" disabled selected>chọn</option>
+              <option value="CAI">Cái</option>
+              <option value="DUC">Đực</option>
+            </select>
+            <input type="text" [value]="petDetails.genderPet" [disabled]="isDisabled" class="text-gray-500 bg-white w-[50%]" *ngIf="showCrystal"/>
+          </span>
+          <span class="font-sans text-gray-900 p-2 text-[14px] inline-flex items-center gap-1">Màu lông:    <input type="text" [value]="petDetails.colorPet" [disabled]="isDisabled" class="text-gray-500 bg-white w-[50%]" *ngIf="showCrystal"/> <input formControlName="furColor" type="text" name="" id="" class="text-gray-500 bg-white w-[50%]" *ngIf="showEditCrystal"></span>
+          <span class="font-sans text-gray-900 p-2 text-[14px] inline-flex items-center gap-1">Nhận nuôi:   <input type="text" [value]="petDetails.adoptive" [disabled]="isDisabled" class="text-gray-500 bg-white w-[50%]" *ngIf="showCrystal"/> <input type="date" formControlName="adoptive" [value]="petDetails.adoptive" [disabled]="isDisabled" class="text-gray-500 bg-white w-[50%]" *ngIf="showEditCrystal"/></span>
+          <span class="font-sans text-gray-900 p-2 text-[14px] inline-flex items-center gap-1">Ngày sinh:   <input type="text" [value]="petDetails.birthDay" [disabled]="isDisabled" class="text-gray-500 bg-white w-[50%]" *ngIf="showCrystal"/> <input type="date" formControlName="birthDay" [value]="petDetails.birthDay" [disabled]="isDisabled" class="text-gray-500 bg-white w-[50%]" *ngIf="showEditCrystal"/></span>
+          <span class="font-sans text-gray-900 p-2 text-[14px] inline-flex items-center gap-1">Tổng số lịch đã khám: <span class="text-gray-500">3</span> </span>
+          <span class="font-sans text-gray-900 p-2 text-[14px] inline-flex items-center gap-1">Trạng thái:   <span class="text-gray-500">Bình thường</span></span>
+        </div>
+        <div class="w-[100%] flex">
+          <label for="" class="pl-2 font-sans text-[14px] text-gray-900">Tính cách:</label>
+          <textarea formControlName="crystal" name="" id=""  [disabled]="isDisabled" class="text-gray-500 bg-white w-[50%]" *ngIf="showEditCrystal"></textarea>
+          <p class="font-sans text-gray-500 p-2 text-[14px] pt-0 whitespace-pre-line" *ngIf="showCrystal">{{petDetails.crystal}}</p>
+        </div>
+        <div class="submit float-end " *ngIf="showChoice">
+          <button (click)="updatePet()" class="p-2 hover:text-white hover:bg-blue-600 rounded-lg" type="button">Xác nhận</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="w-[100%]  border-t-2">
+    <div class="w-[100%] flex items-center justify-center">
+      <ul class="font-sans text-gray-900 text-[13px] flex space-x-8 items-center justify-center">
+        <li class="font-sans text-gray-900 text-[13px] border-t-2 border-black"><button (click)="turnOnAppointment()">Lịch khám</button></li>
+        <li class="font-sans text-gray-900 text-[13px] border-t-2 border-black"><button (click)="turnOnMedicalReport()">Phiếu khám</button></li>
+      </ul>
+    </div>
+    <div class="flex items-center justify-end w-[100%]" *ngIf="appointment">
+      <span class="text-[12px] text-blue-500 hover:text-blue-700"><button (click)="createAppointment()">+ Đăng kí lịch khám</button></span>
+    </div>
+    <div class="content w-[100%]"*ngIf="appointment" >
+      <div class="notice w-[100%] pt-10 pb-10" *ngIf="showNotionAppointment()">
+        <div class="w-[100%] flex space-x-2">
+          <div class="w-[50%] flex items-center justify-end">
+            <img src="https://i.pinimg.com/564x/86/18/75/861875707e61fef94cd6fe4915b8e0c4.jpg" alt="" class="w-[180px] h-[180px] rounded-2xl  transform transition-transform duration-300 ease-in-out hover:scale-90">
+          </div>
+          <div class="flex items-center justify-start">
+            <span class="font-sans text-[14px] text-gray-900">Thú cưng của bạn vẫn khỏe mạnh nên <br> không có gì cần phải khám cả!!!!</span>
+          </div>
+        </div>
+      </div>
+      <table class="w-full mt-2 rounded-lg mb-4 border font-sans" *ngIf="showBodyAppointment()">
+        <thead class="border-gray-200 font-sans">
+          <tr class="font-sans">
+            <th class="font-sans text-black p-2 text-start text-[13px]">Mã lịch khám</th>
+            <th class="font-sans text-black p-2 text-start text-[13px]">Ngày hẹn khám</th>
+            <th class="font-sans text-black p-2 text-start text-[13px]">Tên thú cưng</th>
+            <th class="font-sans text-black p-2 text-start text-[13px]">Bác sĩ khám</th>
+            <th class="font-sans text-black p-2 text-start text-[13px]">Trạng thái</th>
+            <th class="font-sans text-black p-2 text-start text-[13px]"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 overflow-y-auto font-sans">
+          <tr class="font-sans" *ngFor="let item of petDetails.listAppointmentOfPet">
+            <th class="font-medium text-gray-500 text-[13px] text-start p-2">{{item.code}}</th>
+            <th class="font-medium text-gray-500 text-[13px] text-start p-2">{{item.startDate}}</th>
+            <th class="font-medium text-gray-500 text-[13px] text-start p-2">{{item.namePet}}</th>
+            <th class="font-medium text-gray-500 text-[13px] text-start p-2">{{item.doctor}}</th>
+            <th class="font-medium text-gray-500 text-[13px] text-start p-2">{{item.status}}</th>
+            <th class="font-medium text-blue-500 text-[13px] text-start p-2 underline">Chi tiết</th>
+          </tr>
+        </tbody>
+      </table>
+      <div class="flex w-[100%] items-center justify-end space-x-4" *ngIf="showBodyAppointment()">
+        <button class="hover:bg-gray-500 p-1 text-[13px]">Trở lại</button>
+        <button class="hover:bg-gray-500 p-1 text-[13px] rounded-lg">1</button>
+        <button class="hover:bg-gray-500 p-1 text-[13px] rounded-lg">2</button>
+        <button class="hover:bg-gray-500 p-1 text-[13px] rounded-lg">3</button>
+        <button class="hover:bg-gray-500 p-1 text-[13px]">Tiếp tục</button>
+      </div>
+    </div>
+
+
+
+    <div class="content w-[100%]" *ngIf="mediacalReport">
+      <div class="notice w-[100%] pt-10 pb-10" *ngIf="showNotionMedicalReport()">
+        <div class="w-[100%] flex space-x-2">
+          <div class="w-[50%] flex items-center justify-end">
+            <img src="https://i.pinimg.com/564x/86/18/75/861875707e61fef94cd6fe4915b8e0c4.jpg" alt="" class="w-[180px] h-[180px] rounded-2xl  transform transition-transform duration-300 ease-in-out hover:scale-90">
+          </div>
+          <div class="flex items-center justify-start">
+            <span class="font-sans text-[14px] text-gray-900">Thú cưng của bạn vẫn khỏe mạnh nên <br> không có gì cần phải khám cả!!!!</span>
+          </div>
+        </div>
+      </div>
+      <table class="w-full mt-2 rounded-lg mb-4 border font-sans" *ngIf="showBodyMedicalReport()">
+        <thead class="border-gray-200 font-sans">
+          <tr class="font-sans">
+            <th class="font-sans text-black p-2 text-start text-[13px]">Mã phiếu khám</th>
+            <th class="font-sans text-black p-2 text-start text-[13px]">Ngày khám</th>
+            <th class="font-sans text-black p-2 text-start text-[13px]">Ngày tái khám</th>
+            <th class="font-sans text-black p-2 text-start text-[13px]">Tên thú cưng</th>
+            <th class="font-sans text-black p-2 text-start text-[13px]">Bác sĩ khám</th>
+            <th class="font-sans text-black p-2 text-start text-[13px]">Trạng thái</th>
+            <th class="font-sans text-black p-2 text-start text-[13px]"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 overflow-y-auto font-sans">
+          <tr class="font-sans">
+            <th class="font-medium text-gray-500 text-[13px] text-start p-2">7250664</th>
+            <th class="font-medium text-gray-500 text-[13px] text-start p-2">2024-07-30 21:46:21</th>
+            <th class="font-medium text-gray-500 text-[13px] text-start p-2">2024-07-30 21:46:21 </th>
+            <th class="font-medium text-gray-500 text-[13px] text-start p-2">MiMi</th>
+            <th class="font-medium text-gray-500 text-[13px] text-start p-2">Hoàng Phi Hùng</th>
+            <th class="font-medium text-gray-500 text-[13px] text-start p-2">Đã duyệt</th>
+            <th class="font-medium text-blue-500 text-[13px] text-start p-2 underline">Chi tiết</th>
+          </tr>
+        </tbody>
+      </table>
+      <div class="flex w-[100%] items-center justify-end space-x-4" *ngIf="showBodyMedicalReport()">
+        <button class="hover:bg-gray-500 p-1 text-[13px]">Trở lại</button>
+        <button class="hover:bg-gray-500 p-1 text-[13px] rounded-lg">1</button>
+        <button class="hover:bg-gray-500 p-1 text-[13px] rounded-lg">2</button>
+        <button class="hover:bg-gray-500 p-1 text-[13px] rounded-lg">3</button>
+        <button class="hover:bg-gray-500 p-1 text-[13px]">Tiếp tục</button>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="modal fixed top-0 left-0 w-full z-50 h-full bg-black bg-opacity-50 flex items-center justify-center " *ngIf="showAppointment">
+  <div class="bg-white w-[60%] h-[60%] bg-cover bg-center bg-[url('http://localhost:8080/uploads/222bf6eb-aa92-4d59-b687-55d760597b5a_Screenshot%202024-11-13%20021405.png')]">
+    <div class="w-[100%] flex items-center justify-center ">
+      <div class="w-[100%] border-b-2">
+        <div class="flex items-center justify-center p-6">
+          <span class="font-medium text-[20px] text-gray-900">ĐĂNG KÍ PHIẾU KHÁM BỆNH CHO THÚ CƯNG</span>
+        </div>
+      </div>
+    </div>
+    <div class="w-[100%] flex items-center justify-center pt-4">
+      <div class="w-[100%]">
+        <form class="w-[100%] flex justify-center" [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+          <div class="w-[30%]  flex flex-col items-center space-y-2">
+            <input formControlName="appointmentDate" type="datetime-local" name="" id="" placeholder="chọn ngày khám"
+            class="p-1 border border-gray-600 w-[100%]">
+            <div class="w-[100%]">
+              <select formControlName="serviceMedical" name="" id="" class="w-[100%]">
+                <option value="default" selected>Chọn dịch vụ</option>
+                <option *ngFor="let serviceMedical of serviceMedicals" [value]="serviceMedical.id">
+                  {{serviceMedical.name}}
+                </option>
+              </select>
+            </div>
+            <div class="flex justify-between w-[100%]">
+              <div class="flex space-x-2 w-[38%] items-center">
+                <input type="radio" name="appointmentType" id="direct-exam" checked>
+                <label for="direct-exam">Khám trực tiếp</label>
+              </div>
+              <div class="w-[62%] space-x-2 items-center">
+                <select formControlName="doctor" name="" id="" class = "w-[100%] pl-2 pr-2 border border-gray-600 rounded-lg" >
+                  <option value="default" disabled selected>
+                    Chọn bác sĩ
+                  </option>
+                  <option *ngFor="let doctor of doctorArray" [value]="doctor.id">
+                    {{doctor.fullName}}
+                  </option>
+                </select>
+              </div>
+
+            </div>
+            <textarea formControlName="message" name="" id="" class="w-[100%] border border-gray-600 pl-2 h-32" placeholder="Gởi lời nhắn tới bác sĩ"></textarea>
+            <button class="w-[100%] flex space-x-1">
+              <div class="submit-appointment bg-yellow-200 rounded-lg w-[50%] flex justify-center hover:bg-yellow-100 transform transition-transform duration-300 ease-in-out hover:scale-90">
+                <button class="p-2">
+                  <span class="text-gray-500 font-medium">ĐẶT HẸN</span>
+                </button>
+              </div>
+              <div class="submit-appointment bg-red-500 rounded-lg w-[50%] flex justify-center  transform transition-transform duration-300 ease-in-out hover:scale-90">
+                <button class="p-2" type="submit">
+                  <span class="text-white font-medium">Hủy</span>
+                </button>
+              </div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center" *ngIf="choosePicture">
+  <div class="w-[30%] h-[40%] bg-white p-2">
+    <div class="w-[100%] flex items-center justify-center">
+      <button (click)="triggerFileInput()"><img [src]="petImagePreview" alt="Pet Image" class="rounded-full w-[200px] h-[200px]"></button>
+    </div>
+    <div class="w-[100%] flex items-center justify-center space-x-4 pt-10">
+      <button  (click)="updateImageProfilePet()" class="p-2 bg-blue-700 text-white font-sans rounded-lg transition-transform transform active:scale-95">Chọn ảnh</button>
+      <button (click)="closeChosePicture()" class="p-2 text-black font-sans rounded-lg hover:bg-gray-500 hover:bg-opacity-50 transition-transform transform active:scale-95">Hủy</button>
+    </div>
+  </div>
+</div>
+<input id="file-input" type="file" (change)="onFileChange($event)" style="display: none;">
+
+<div *ngIf="showSuccess" class="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] overflow-auto font-[sans-serif] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)]">
+  <div class="w-full max-w-lg bg-white shadow-lg rounded-lg p-6 relative">
+    <div class="my-8 text-center">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           class="w-14 shrink-0 fill-green-500 inline"
+           viewBox="0 0 512 512">
+        <path d="M383.841 171.838c-7.881-8.31-21.02-8.676-29.343-.775L221.987 296.732l-63.204-64.893c-8.005-8.213-21.13-8.393-29.35-.387-8.213 7.998-8.386 21.137-.388 29.35l77.492 79.561a20.687 20.687 0 0 0 14.869 6.275 20.744 20.744 0 0 0 14.288-5.694l147.373-139.762c8.316-7.888 8.668-21.027.774-29.344z" />
+        <path d="M256 0C114.84 0 0 114.84 0 256s114.84 256 256 256 256-114.84 256-256S397.16 0 256 0zm0 470.487c-118.265 0-214.487-96.214-214.487-214.487 0-118.265 96.221-214.487 214.487-214.487 118.272 0 214.487 96.221 214.487 214.487 0 118.272-96.215 214.487-214.487 214.487z" />
+      </svg>
+      <h4 class="text-xl text-gray-800 font-semibold mt-4">Tải ảnh lên thành công!!!</h4>
+    </div>
+    <button (click)="chooseCloseSuccess()" type="button" class="px-5 py-2.5 w-full rounded-lg text-white text-sm border-none outline-none bg-gray-800 hover:bg-gray-700">
+      Đóng thông báo
+    </button>
+  </div>
+</div>
+<div *ngIf="showSuccessUpdate" class="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] overflow-auto font-[sans-serif] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)]">
+  <div class="w-full max-w-lg bg-white shadow-lg rounded-lg p-6 relative">
+    <div class="my-8 text-center">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           class="w-14 shrink-0 fill-green-500 inline"
+           viewBox="0 0 512 512">
+        <path d="M383.841 171.838c-7.881-8.31-21.02-8.676-29.343-.775L221.987 296.732l-63.204-64.893c-8.005-8.213-21.13-8.393-29.35-.387-8.213 7.998-8.386 21.137-.388 29.35l77.492 79.561a20.687 20.687 0 0 0 14.869 6.275 20.744 20.744 0 0 0 14.288-5.694l147.373-139.762c8.316-7.888 8.668-21.027.774-29.344z" />
+        <path d="M256 0C114.84 0 0 114.84 0 256s114.84 256 256 256 256-114.84 256-256S397.16 0 256 0zm0 470.487c-118.265 0-214.487-96.214-214.487-214.487 0-118.265 96.221-214.487 214.487-214.487 118.272 0 214.487 96.221 214.487 214.487 0 118.272-96.215 214.487-214.487 214.487z" />
+      </svg>
+      <h4 class="text-xl text-gray-800 font-semibold mt-4">Thông tin thú cưng đã được thay đổi</h4>
+    </div>
+    <button (click)="chooseCloseSuccessUpdate()" type="button" class="px-5 py-2.5 w-full rounded-lg text-white text-sm border-none outline-none bg-gray-800 hover:bg-gray-700">
+      Đóng thông báo
+    </button>
+  </div>
+</div>
+

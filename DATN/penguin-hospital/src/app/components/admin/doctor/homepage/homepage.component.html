@@ -1,0 +1,310 @@
+
+<div class="body bg-white w-full h-screen overflow-auto">
+  <div class="flex h-full">
+    <div class="menu-col bg-white h-full fixed top-0 left-0 w-[17%] z-20">
+      <div class="menu-content h-full flex flex-col border border-r-gray-200 shadow-md">
+        <div class="w-full border-gray-300 flex items-center justify-center p-4 shadow-sm">
+          <div class="w-[80%]">
+            <a routerLink="/doctor" class="w-[100%] flex items-center space-x-2">
+              <img src="http://localhost:8080/uploads/222bf6eb-aa92-4d59-b687-55d760597b5a_Screenshot%202024-11-13%20021405.png" alt="" class="w-12 h-12 rounded-full">
+              <span class="text-blue-600 font-bold text-lg">DoctorBoard</span>
+            </a>
+          </div>
+        </div>
+        <div class="flex-grow flex flex-col justify-center space-y-64 items-center w-[100%]">
+          <div class="w-[80%] p-2 space-y-2">
+            <div class="w-[100%] hover:bg-gray-200 p-2 rounded-l-full rounded-r-sm hover:w-[126%] hover:text-blue-500" [ngClass]="{'bg-gray-200 text-blue-500 w-[126%]': isActive('/doctor/appoinment')}">
+              <a routerLink="appoinment" class="w-[100%]">
+                <div class="menu-item w-[100%] rounded-full hover:w-[80%] hover:bg-white p-2 flex items-center space-x-4 cursor-pointer" [ngClass]="{'bg-white w-[80%]': isActive('/doctor/appoinment')}">
+                  <svg class="h-6 w-6 text-red-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                  <span class="font-sans text-[16px]">Lịch hẹn</span>
+                </div>
+              </a>
+            </div>
+            <div class="w-[100%] hover:bg-gray-200 p-2 rounded-l-full rounded-r-sm hover:w-[126%] hover:text-blue-500" [ngClass]="{'bg-gray-200 w-[126%] text-blue-500': isActive('/doctor/medical-report')}">
+              <a routerLink="medical-report" class="w-[100%]">
+                <div class="menu-item w-[100%] rounded-full hover:text-blue-500 hover:w-[80%] hover:bg-white space-x-4 p-2 flex items-center" [ngClass]="{'bg-white w-[80%] text-blue-500': isActive('/doctor/medical-report')}">
+                  <div class="icon">
+                    <svg class="h-6 w-6 text-red-black"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z"/>
+                      <path d="M9 5H7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2V7a2 2 0 0 0 -2 -2h-2" />
+                      <rect x="9" y="3" width="6" height="4" rx="2" />  <line x1="9" y1="12" x2="9.01" y2="12" />
+                      <line x1="13" y1="12" x2="15" y2="12" />  <line x1="9" y1="16" x2="9.01" y2="16" />
+                      <line x1="13" y1="16" x2="15" y2="16" />
+                    </svg>
+                  </div>
+                  <div class="content-icon">
+                    <span class="font-sans text-[16px]">Phiếu khám</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="w-[100%] hover:bg-gray-200 p-2 rounded-l-full rounded-r-sm hover:w-[126%] hover:text-blue-500" [ngClass]="{'bg-gray-200 w-[126%] text-blue-500': isActive('/doctor/question')}">
+              <a  routerLink="question" class="w-[100%]">
+                <div class="menu-item w-[100%] rounded-full hover:text-blue-500 hover:w-[80%] hover:bg-white  space-x-4 p-2 flex items-center"  [ngClass]="{'bg-white w-[80%] text-blue-500': isActive('/doctor/question')}">
+                  <div class="icon">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8 11H8.01M12 11H12.01M16 11H16.01M21 20L17.6757 18.3378C17.4237 18.2118 17.2977 18.1488 17.1656 18.1044C17.0484 18.065 16.9277 18.0365 16.8052 18.0193C16.6672 18 16.5263 18 16.2446 18H6.2C5.07989 18 4.51984 18 4.09202 17.782C3.71569 17.5903 3.40973 17.2843 3.21799 16.908C3 16.4802 3 15.9201 3 14.8V7.2C3 6.07989 3 5.51984 3.21799 5.09202C3.40973 4.71569 3.71569 4.40973 4.09202 4.21799C4.51984 4 5.0799 4 6.2 4H17.8C18.9201 4 19.4802 4 19.908 4.21799C20.2843 4.40973 20.5903 4.71569 20.782 5.09202C21 5.51984 21 6.0799 21 7.2V20Z" stroke="#66c2e1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                  </div>
+                  <div class="content-icon">
+                    <span class="font-sans text-[16px]">Câu hỏi</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="w-[100%] hover:bg-gray-200 p-2 rounded-l-full rounded-r-sm hover:w-[126%] hover:text-blue-500" [ngClass]="{'bg-gray-200 w-[126%] text-blue-500': isActive('/doctor/invoice')}">
+              <a  routerLink="invoice" class="w-[100%]">
+                <div class="menu-item w-[100%] rounded-full  hover:w-[80%] hover:bg-white space-x-4 p-2 flex items-center"  [ngClass]="{'bg-white w-[80%] text-blue-500': isActive('/doctor/invoice')}">
+                  <div class="icon">
+                    <svg class="w-6 h-6" viewBox="0 0 1024 1024"  version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M926.56 516.61l24.32-8.66V292.57h-73.14v166.36c-44.61 25.8-73.14 73.73-73.14 126.21 0 52.48 28.54 100.41 73.14 126.21v129.79H146.31V711.36c44.61-25.8 73.14-73.73 73.14-126.21 0-52.48-28.54-100.41-73.14-126.21v-129.8h292.57V256H73.17v251.95l24.32 8.66c29.2 10.38 48.82 37.93 48.82 68.54 0 30.61-19.62 58.16-48.82 68.54l-24.32 8.66V914.3h877.71V662.34l-24.32-8.66c-29.2-10.38-48.82-37.93-48.82-68.54 0-30.6 19.63-58.16 48.82-68.53z" fill="#759be1"></path><path d="M365.73 621.19l155.68 0.52 336.18-336.18-155.16-155.15-336.18 336.18-0.52 154.63z m73.39-72.89l0.17-51.34 5.06-5.06 51.72 51.72-4.85 4.85-52.1-0.17z m56.95-108.12l129.22-129.22 51.72 51.72L547.78 491.9l-51.71-51.72z m258.08-154.64l-25.43 25.43L677 259.25l25.43-25.43 51.72 51.72zM219.45 694.86h585.14V768H219.45z" fill="#759be1"></path></g></svg>
+                  </div>
+                  <div class="content-icon">
+                    <span class="font-sans text-[16px]">Hóa đơn</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="w-[100%] hover:bg-gray-200 p-2 rounded-l-full rounded-r-sm hover:w-[126%] hover:text-blue-500" [ngClass]="{'bg-gray-200 w-[126%] text-blue-500': isActive('/doctor/notice')}">
+              <button class="w-[100%]">
+                <div class="menu-item w-[100%] rounded-full hover:text-blue-500 hover:w-[80%] hover:bg-white space-x-4 p-2 flex items-center" [ngClass]="{'bg-white w-[80%] text-blue-500': isActive('/doctor/notice')}">
+                  <div class="icon">
+                    <svg class="h-6 w-6 text-red-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M224 0c-17.7 0-32 14.3-32 32l0 19.2C119 66 64 130.6 64 208l0 18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416l384 0c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8l0-18.8c0-77.4-55-142-128-156.8L256 32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg>
+                  </div>
+                  <div class="content-icon">
+                    <span class="font-sans text-[16px]">Thông báo</span>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div class="w-[80%] p-2 space-y-1">
+            <div class="w-[100%] hover:bg-gray-200 p-2 rounded-full hover:w-[100%]">
+              <div class="menu-item w-[100%] rounded-full hover:text-white hover:w-[80%] hover:bg-gray-200 space-x-4 p-2 flex items-center">
+                <div class="icon">
+                  <svg class="h-6 w-6 text-red-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                  </svg>
+                </div>
+                <div class="content-icon">
+                  <span class="font-sans text-[16px] text-red-500"><button (click)="logout()">
+                    Đăng xuất
+                  </button></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-full ml-[17%] ">
+      <div class="menu-row w-full bg-white h-[8%] flex justify-center items-center fixed top-0 left-[17%] z-10">
+        <div class="flex items-center w-[60%] p-4 space-x-4">
+          <div class="p-2 w-[5%]">
+            <svg class="h-7 w-7 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+            </svg>
+          </div>
+          <div class="search flex items-center w-[40%] p-2  rounded-full transition-transform duration-300 hover:scale-105">
+            <input type="text" class="w-[100%] bg-gray-200 px-4 py-2 text-sm rounded-l-full focus:outline-none" placeholder="Tìm kiếm...">
+            <div class="bg-blue-500 p-2 rounded-r-full flex items-center justify-center text-white">
+              <ion-icon name="search-outline"></ion-icon>
+            </div>
+          </div>
+        </div>
+        <div class="w-[40%] flex items-center justify-center pr-4 space-x-4">
+          <svg class="w-6 h-6 text-gray-800" fill="none" viewBox="0 0 20 21" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 3.464V1.1m0 2.365a5.338 5.338 0 0 1 5.133 5.368v1.8c0 2.386 1.867 2.982 1.867 4.175C17 15.4 17 16 16.462 16H3.538C3 16 3 15.4 3 14.807c0-1.193 1.867-1.789 1.867-4.175v-1.8A5.338 5.338 0 0 1 10 3.464ZM1.866 8.832a8.458 8.458 0 0 1 2.252-5.714m14.016 5.714a8.458 8.458 0 0 0-2.252-5.714M6.54 16a3.48 3.48 0 0 0 6.92 0H6.54Z"/>
+          </svg>
+          <img src="{{avatar}}" alt="" class="w-12 h-12 rounded-full">
+        </div>
+      </div>
+      <div class="content pt-[5%] bg-white p-2 min-h-screen">
+        <div class="w-[100%] rounded-lg bg-gray-200 p-2">
+          <div class="content-home w-[100%]" *ngIf="shouldShowApp()">
+            <div class="notice w-[100%] grid grid-cols-3 pt-10 pb-10 gap-2 justify-items-center items-center">
+              <div class="w-[70%] h-auto p-2 bg-white flex items-center justify-center rounded-lg">
+                <div class="w-[20%] p-2 bg-blue-500 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <path fill="#74C0FC" d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 400l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z"/>
+                  </svg>
+                </div>
+                <div class="w-[80%] flex flex-col items-center">
+                  <div class="w-[100%]">
+                    <Span class="font-bold text-slate-800 text-[19px] pl-10">{{totalAppointToday}}</Span>
+                  </div>
+                  <div class="w-[100%]">
+                    <Span class="font-sans text-gray-500 text-[14px] pl-10">Lịch khám hôm nay</Span>
+                  </div>
+                </div>
+              </div>
+              <div class="w-[70%] h-auto p-2 bg-white flex items-center justify-center rounded-lg">
+                <div class="w-[20%] p-2 bg-red-300 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path fill="#ed353e" d="M96 352L96 96c0-35.3 28.7-64 64-64l256 0c35.3 0 64 28.7 64 64l0 197.5c0 17-6.7 33.3-18.7 45.3l-58.5 58.5c-12 12-28.3 18.7-45.3 18.7L160 416c-35.3 0-64-28.7-64-64zM272 128c-8.8 0-16 7.2-16 16l0 48-48 0c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l48 0 0 48c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-48 48 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-48 0 0-48c0-8.8-7.2-16-16-16l-32 0zm24 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-160 0C60.9 512 0 451.1 0 376L0 152c0-13.3 10.7-24 24-24s24 10.7 24 24l0 224c0 48.6 39.4 88 88 88l160 0z"/>
+                  </svg>
+                </div>
+                <div class="w-[80%] flex flex-col items-center">
+                  <div class="w-[100%]">
+                    <Span class="font-bold text-slate-800 text-[19px] pl-10">30</Span>
+                  </div>
+                  <div class="w-[100%]">
+                    <Span class="font-sans text-gray-500 text-[14px] pl-10">Số phiếu khám</Span>
+                  </div>
+                </div>
+              </div>
+              <div class="w-[70%] h-auto p-2 bg-white flex items-center justify-center rounded-lg">
+                <div class="w-[20%] p-2 bg-gray-400 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path fill="#dae0ec" d="M64 0C28.7 0 0 28.7 0 64L0 352c0 35.3 28.7 64 64 64l96 0 0 80c0 6.1 3.4 11.6 8.8 14.3s11.9 2.1 16.8-1.5L309.3 416 448 416c35.3 0 64-28.7 64-64l0-288c0-35.3-28.7-64-64-64L64 0z"/>
+                  </svg>
+                </div>
+                <div class="w-[80%] flex flex-col items-center">
+                  <div class="w-[100%]">
+                    <Span class="font-bold text-slate-800 text-[19px] pl-10">{{totalQuestion}}</Span>
+                  </div>
+                  <div class="w-[100%]">
+                    <Span class="font-sans text-gray-500 text-[14px] pl-10">Tổng phiếu câu hỏi</Span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-[100] flex items-center justify-center pb-40">
+              <div class="w-[50%] flex  justify-center space-x-2 pb-2">
+                <div class="w-[90%] p-2 bg-white">
+                  <div class="w-[100%]" *ngIf="showListAppointmentToday()">
+                    <div class="flex w-[100%]">
+                      <div class="w-[50%]">
+                        <span class="font-medium text-[20px]">Danh sách lịch hẹn hôm nay</span>
+                      </div>
+                    </div>
+                    <table class="w-full mt-2 rounded-lg mb-4 border font-sans">
+                      <thead class="border-gray-200 font-sans">
+                        <tr class="font-sans">
+                          <th class="font-sans text-black p-2 text-start text-[13px]">Pet</th>
+                          <th class="font-sans text-black p-2 text-start text-[13px]">Tên thú cưng</th>
+                          <th class="font-sans text-black p-2 text-start text-[13px]">Ngày khám</th>
+                          <th class="font-sans text-black p-2 text-start text-[13px]">Trạng thái</th>
+                          <th class="font-sans text-black p-2 text-start text-[13px]"></th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-gray-100 overflow-y-auto font-sans" *ngFor="let item of appointmentDoctorOutput">
+                        <tr class="font-sans">
+                          <th class="font-medium text-gray-500 text-[13px] text-start p-2"><img src="{{item.url}}" class="w-[46px] h-[46px] rounded-full object-cover" alt=""></th>
+                          <th class="font-medium text-gray-500 text-[13px] text-start p-2">{{item.namePet}}</th>
+                          <th class="font-medium text-gray-500 text-[13px] text-start p-2">{{item.dateAppointment}}</th>
+                          <th class="font-medium text-gray-500 text-[13px] text-start p-2">{{item.status}}</th>
+                          <th class="font-medium text-blue-500 text-[13px] text-start p-2 underline"><button (click)="showAppointmentDetailToday(item)">Chi tiết</button></th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="w-[100%] bg-white" *ngIf="showNotionAppointmentToday()">
+                    <div class="w-[100%] flex items-center justify-center border-b border-gray-400">
+                      <span class="p-2 font-bold text-gray-900">Công việc bạn cần làm hôm nay</span>
+                    </div>
+                    <div class="w-[100%]  h-[100%] flex items-center justify-center p-2">
+                      <div class="w-[50%] flex items-center justify-center p-2">
+                        <img src="https://resizing.flixster.com/02jPZPbUt3gr01vgaAPOsD3MXy8=/fit-in/352x330/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p25688898_v_h9_ab.jpg" alt="">
+                      </div>
+                      <div class="w-[50%] p-2 flex items-center justify-start">
+                        <span class="text-gray-500 font-sans">Nay bạn không có lịch khám nào cả</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="w-[50%] flex justify-center items-center">
+                <div class="w-[90%] p-2 bg-white">
+                  <div div class="flex w-[100%]">
+                      <div class="w-[50%]">
+                        <span class="font-medium text-[20px]">Danh sách câu hỏi chưa trả lời</span>
+                      </div>
+                      <div class="w-[50%] flex items-center justify-end space-x-2 ">
+                        <div class="transition-transform duration-300 hover:scale-105">
+                          <input type="text" class="text-gray-500 bg-slate-200 rounded-full p-0.5 pl-5" [(ngModel)]="titleQuestion" (keyup.enter)="searchQuestion()"
+                            placeholder="nhập tiêu đề" >
+                        </div>
+                        <div class="w-[5%] text-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M3.9 54.9C10.5 40.9 24.5 32 40 32l432 0c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9 320 448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6l0-79.1L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <table class="w-full mt-2 rounded-lg mb-4 border font-sans">
+                      <thead class="border-gray-200 font-sans">
+                        <tr class="font-sans">
+                          <th class="font-sans text-black p-2 text-center text-[13px]">Người dùng</th>
+                          <th class="font-sans text-black p-2 text-center text-[13px]">Loại câu hỏi</th>
+                          <th class="font-sans text-black p-2 text-center text-[13px]">Tiêu đề</th>
+                          <th class="font-sans text-black p-2 text-center text-[13px]">Trạng thái</th>
+                          <th class="font-sans text-black p-2 text-center text-[13px]"></th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-gray-100 overflow-y-auto font-sans" *ngFor="let item of questionOutput">
+                        <tr class="font-sans">
+                          <th class="font-medium text-gray-500 text-[13px] text-start p-2 flex justify-center"><img src="{{item.urlUser}}" class="w-[46px] h-[46px] rounded-full object-cover" alt=""></th>
+                          <th class="font-medium text-gray-500 text-[13px] text-center p-2">{{item.typeQuestion}}</th>
+                          <th class="font-medium text-gray-500 text-[13px] text-center p-2">{{item.title}}</th>
+                          <th class="font-medium text-gray-500 text-[13px] text-center p-2">{{item.statusQuestion}}</th>
+                          <th class="font-medium text-blue-500 text-[13px] text-center p-2 underline">Chi tiết</th>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<div class="modal fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-30 flex items-center justify-center" *ngIf="showAppointment">
+  <div class="w-[50%] h-auto bg-yellow-100 p-2 pb-4">
+    <div class="w-[100%] flex items-center justify-end">
+      <button (click)="closeShowAppointmentToday()" class="transition-transform duration-300 hover:scale-105">
+        <svg class="w-7 h-7" fill="#b85b2f" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" stroke="#b85b2f"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>cancel</title> <path d="M10.771 8.518c-1.144 0.215-2.83 2.171-2.086 2.915l4.573 4.571-4.573 4.571c-0.915 0.915 1.829 3.656 2.744 2.742l4.573-4.571 4.573 4.571c0.915 0.915 3.658-1.829 2.744-2.742l-4.573-4.571 4.573-4.571c0.915-0.915-1.829-3.656-2.744-2.742l-4.573 4.571-4.573-4.571c-0.173-0.171-0.394-0.223-0.657-0.173v0zM16 1c-8.285 0-15 6.716-15 15s6.715 15 15 15 15-6.716 15-15-6.715-15-15-15zM16 4.75c6.213 0 11.25 5.037 11.25 11.25s-5.037 11.25-11.25 11.25-11.25-5.037-11.25-11.25c0.001-6.213 5.037-11.25 11.25-11.25z"></path> </g></svg>
+      </button>
+    </div>
+    <div class="header-title-details-appointment w-[100%] flex items-center justify-center p-2">
+      <div class="w-[40%] h-[120px] flex flex-col items-end justify-center pr-2 border-r-2">
+        <span class="font-sans text-[25px] text-[#b85b2f]">Phóng khám</span>
+        <span class="font-sans text-[25px] text-[#b85b2f]">Thú ý Penguin</span>
+      </div>
+      <div class="w-[40%] flex items-center justify-start pl-2">
+          <img src="http://localhost:8080/uploads/222bf6eb-aa92-4d59-b687-55d760597b5a_Screenshot%202024-11-13%20021405.png" alt="" class="w-[120px] h-[120px]">
+      </div>
+    </div>
+    <div class="body-title-details-appointment w-[100%] flex flex-items justify-center">
+      <div class="w-[80%]">
+        <div class="w-[100%] p-2 flex flex-col">
+          <label for="" class="font-medium text-[#b85b2f]">Thông tin lịch khám</label>
+          <span class="bg-white p-2 text-[14px]"><span class="text-[#b85b2f]">Tên người đăng kí khám:</span> {{appointmentDetailToday.fullNameUser}}</span>
+        </div>
+        <div class="w-[100%] p-2 flex items-center justify-center space-x-2">
+          <span class="bg-white p-2 text-[14px] w-[50%]"><span class="text-[#b85b2f]">Ngày khám:</span> {{appointmentDetailToday.date}}</span>
+          <span class="bg-white p-2 text-[14px] w-[50%]"><span class="text-[#b85b2f]">Thời gian khám:</span> {{appointmentDetailToday.time}}</span>
+        </div>
+        <div class="w-[100%] p-2 flex flex-col">
+          <span class="bg-white p-2 text-[14px]"><span class="text-[#b85b2f]">Dịch vụ:</span> {{appointmentDetailToday.serviceMedical}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+

@@ -1,0 +1,169 @@
+<div class="w-[100%] flex items-center justify-center">
+  <div class="w-[100%] bg-gray-400">
+    <div class="header w-[100%] bg-white p-1">
+      <span class="text-[14px] font-medium">CÂU HỎI</span>
+    </div>
+    <div class="header-search w-[100%] p-2">
+      <div class="w-[40%] bg-white p-1 rounded-full  flex items-center justify-start">
+        <div class="w-[20%]">
+          <select class="outline-none text-[14px] text-gray-500" name="" id="">
+            <option class="text-[14px] text-gray-500 " value="">Loại câu hỏi</option>
+          </select>
+        </div>
+        <input  placeholder="nhập mã câu hỏi" class="outline-none ml-10 text-[14px] w-[60%] text-gray-500" type="text">
+        <div class="icon flex items-center justify-end w-[20%]">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+        </div>
+      </div>
+    </div>
+    <div class="body w-[100%]">
+      <table class="w-[100%]">
+        <thead class="w-[100%] bg-white">
+          <tr>
+            <th class="border-b-[0.5px] border-gray-300 text-gray-900 p-2 text-[14px] text-center font-medium">#</th>
+            <th class="border-b-[0.5px] border-gray-300 text-gray-900 p-2 text-[14px] text-center font-medium">Mã câu hỏi</th>
+            <th class="border-b-[0.5px] border-gray-300 text-gray-900 p-2 text-[14px] text-center font-medium">Họ tên</th>
+            <th class="border-b-[0.5px] border-gray-300 text-gray-900 p-2 text-[14px] text-center font-medium">Loại câu hỏi</th>
+            <th class="border-b-[0.5px] border-gray-300 text-gray-900 p-2 text-[14px] text-center font-medium">Tiêu đề câu hỏi</th>
+            <th class="border-b-[0.5px] border-gray-300 text-gray-900 p-2 text-[14px] text-center font-medium">Ngày hỏi</th>
+            <th class="border-b-[0.5px] border-gray-300 text-gray-900 p-2 text-[14px] text-center font-medium">Xem</th>
+            <th class="border-b-[0.5px] border-gray-300 text-gray-900 p-2 text-[14px] text-center font-medium">Xóa</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white" *ngFor="let item of questionOutPut; let i = index">
+          <tr>
+            <td  class="text-[14px] font-sans text-black-500 text-center border-b-[1px] border-gray-300 p-2 whitespace-nowrap">{{i+1}}</td>
+            <td  class="text-[14px] font-sans text-black-500 text-center border-b-[1px] border-gray-300 p-2 whitespace-nowrap">{{item.codeQuestion}}</td>
+            <td  class="text-[14px] font-sans text-black-500 text-center border-b-[1px] border-gray-300 p-2 whitespace-nowrap">{{item.fullName}}</td>
+            <td  class="text-[14px] font-sans text-black-500 text-center border-b-[1px] border-gray-300 p-2 whitespace-nowrap">{{item.typeQuestion}}</td>
+            <td  class="text-[14px] font-sans text-black-500 text-center border-b-[1px] border-gray-300 p-2 whitespace-nowrap">{{item.title}}</td>
+            <td  class="text-[14px] font-sans text-black-500 text-center border-b-[1px] border-gray-300 p-2 whitespace-nowrap">{{item.createQuestionDate}}</td>
+            <td  class="text-[14px] font-sans text-black-500 text-center border-b-[1px] border-gray-300 p-2 whitespace-nowrap">
+              <button (click)="detailQuestion(item.id)">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M20.5 8C21.8807 8 23 6.88071 23 5.5C23 4.11929 21.8807 3 20.5 3C19.1193 3 18 4.11929 18 5.5C18 6.88071 19.1193 8 20.5 8ZM22 17.1333V9.74394C21.5308 9.90977 21.026 10 20.5 10C20.331 10 20.1642 9.99068 20 9.97254V17.1333C20 17.6466 19.6079 18 19.2 18H4.8C4.39214 18 4 17.6466 4 17.1333V7.94766L9.77948 14.3096C10.9699 15.6199 13.0301 15.6199 14.2205 14.3096L18.5418 9.55276C17.9305 9.25683 17.3962 8.82665 16.9774 8.3005L12.7402 12.9647C12.3434 13.4015 11.6566 13.4015 11.2598 12.9647L4.9327 6H16.0275C16.0093 5.83583 16 5.669 16 5.5C16 4.97405 16.0902 4.46917 16.2561 4H4.8C3.86451 4 3.0468 4.46923 2.54433 5.16792C2.20074 5.64567 2 6.23499 2 6.86667V17.1333C2 18.682 3.21964 20 4.8 20H19.2C20.7804 20 22 18.682 22 17.1333Z" fill="#000000"></path> </g></svg>
+              </button>
+            </td>
+            <td class="text-[14px] font-sans text-black-500 text-center border-b-[1px] border-gray-300 p-2 whitespace-nowrap">
+              <button (click)="deleteQuestion(item.id)">
+                <svg class="w-5 h-5" viewBox="0 0 1024 1024"  version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M960 160h-291.2a160 160 0 0 0-313.6 0H64a32 32 0 0 0 0 64h896a32 32 0 0 0 0-64zM512 96a96 96 0 0 1 90.24 64h-180.48A96 96 0 0 1 512 96zM844.16 290.56a32 32 0 0 0-34.88 6.72A32 32 0 0 0 800 320a32 32 0 1 0 64 0 33.6 33.6 0 0 0-9.28-22.72 32 32 0 0 0-10.56-6.72zM832 416a32 32 0 0 0-32 32v96a32 32 0 0 0 64 0v-96a32 32 0 0 0-32-32zM832 640a32 32 0 0 0-32 32v224a32 32 0 0 1-32 32H256a32 32 0 0 1-32-32V320a32 32 0 0 0-64 0v576a96 96 0 0 0 96 96h512a96 96 0 0 0 96-96v-224a32 32 0 0 0-32-32z" fill="#ff0000"></path><path d="M384 768V352a32 32 0 0 0-64 0v416a32 32 0 0 0 64 0zM544 768V352a32 32 0 0 0-64 0v416a32 32 0 0 0 64 0zM704 768V352a32 32 0 0 0-64 0v416a32 32 0 0 0 64 0z" fill="#ff0000"></path></g></svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="flex w-[100%] bg-white items-center justify-end space-x-4" >
+        <button class="hover:bg-gray-500 p-1 text-[13px]">Trở lại</button>
+        <button class="hover:bg-gray-500 p-1 text-[13px] rounded-lg" >1</button>
+        <button class="hover:bg-gray-500 p-1 text-[13px] rounded-lg" >2</button>
+        <button class="hover:bg-gray-500 p-1 text-[13px] rounded-lg" >3</button>
+        <button class="hover:bg-gray-500 p-1 text-[13px]">Tiếp tục</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showDetailQuestion" class="modal fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50 flex items-center justify-center">
+  <div class="w-[50%] h-[90%] bg-yellow-200 rounded-2xl">
+    <div class="border-b-[0.5px] border-gray-500 w-[100%] h-[6%] flex items-center justify-end">
+      <button (click)="tradeDetailQuestion()">
+        <svg class="w-6 h-6 m-2" fill="#ffffff" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>cancel</title> <path d="M10.771 8.518c-1.144 0.215-2.83 2.171-2.086 2.915l4.573 4.571-4.573 4.571c-0.915 0.915 1.829 3.656 2.744 2.742l4.573-4.571 4.573 4.571c0.915 0.915 3.658-1.829 2.744-2.742l-4.573-4.571 4.573-4.571c0.915-0.915-1.829-3.656-2.744-2.742l-4.573 4.571-4.573-4.571c-0.173-0.171-0.394-0.223-0.657-0.173v0zM16 1c-8.285 0-15 6.716-15 15s6.715 15 15 15 15-6.716 15-15-6.715-15-15-15zM16 4.75c6.213 0 11.25 5.037 11.25 11.25s-5.037 11.25-11.25 11.25-11.25-5.037-11.25-11.25c0.001-6.213 5.037-11.25 11.25-11.25z"></path> </g></svg>
+      </button>
+    </div>
+    <div class="w-[100%] h-[calc(85%)] overflow-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-bg-[#252728]">
+      <div class="w-[100%] p-2">
+        <div class="w-[100%] flex header items-center justify-between pb-2">
+          <div class="w-[50%] flex">
+            <img class="w-[40px] h-[40px] rounded-full" src="{{questionDetail.urlUser}}" alt="">
+            <div class="flex flex-col items-start">
+              <span class="text-[#b85b2f] font-bold text-[14px] pl-2">{{questionDetail.fullName}}</span>
+              <span class="text-gray-500 text-[12px] pl-2">17 tháng 11 lúc 6:06</span>
+            </div>
+          </div>
+          <div class="w-[50%] flex items-center justify-end pr-2">
+              <button>
+
+                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 7H20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 10L7.70141 19.3578C7.87432 20.3088 8.70258 21 9.66915 21H14.3308C15.2974 21 16.1257 20.3087 16.2986 19.3578L18 10" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+              </button>
+          </div>
+        </div>
+        <div class="w-[100%] body flex flex-col items-center justify-center">
+          <div class="w-[80%] border-black border-[0.5px] rounded-2xl">
+            <img *ngIf="showImageQuestion" class="h-[400px] w-[100%] object-cover rounded-t-2xl" src="{{questionDetail.urlImage}}" alt="">
+            <div class="w-[80%] pt-2 flex">
+              <span class="pl-2 pb-2 text-[#b85b2f] font-medium">{{questionDetail.typeQuestion}}</span>
+              <svg class="w-6 h-6" fill="#b85b2f" viewBox="-8.5 0 32 32" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                <path d="M0 24.781v-17.594l15.281 8.813z"></path>
+              </svg>
+              <span class="pl-2 pb-2 text-black  font-medium">{{questionDetail.title}}</span>
+            </div>
+            <div class="w-[80%] pb-2 pl-4">
+              <span class="text-black text-[14px]">{{questionDetail.content}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="w-[100%] comment flex items-center justify-center pt-4">
+          <div class="w-[80%] border-t-[1px] border-black border-b-[1px]">
+            <button class="flex hover:bg-gray-500 m-1 pr-1 pl-1 rounded-md">
+              <svg class="w-6 h-6 mt-1 mb-1"  viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>comment-4</title> <desc>Created with Sketch Beta.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"> <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-308.000000, -255.000000)" fill="#000000"> <path d="M327.494,279.633 L324,284 L320.506,279.633 C314.464,278.355 309.992,273.863 309.992,268.501 C309.992,262.146 316.264,256.994 324,256.994 C331.736,256.994 338.008,262.146 338.008,268.501 C338.008,273.863 333.536,278.355 327.494,279.633 L327.494,279.633 Z M324,255 C315.163,255 308,261.143 308,268.72 C308,274.969 312.877,280.232 319.542,281.889 L324,287.001 L328.459,281.889 C335.123,280.232 340,274.969 340,268.72 C340,261.143 332.837,255 324,255 L324,255 Z" id="comment-4" sketch:type="MSShapeGroup"> </path> </g> </g> </g></svg>
+              <span class="text-black pb-1 pt-1 pl-1 text-[14px]">Bình luận</span>
+            </button>
+          </div>
+        </div>
+        <div class="w-[100%] comment flex items-center justify-center pt-2" *ngFor="let item of commentParen">
+          <div class="w-[80%] comment-cha">
+            <div class="w-[100%] flex space-x-2 mt-2">
+              <img class="w-[32px] h-[32px] object-cover rounded-full" src="{{item.urlImageUser}}" alt="">
+              <div class="w-[90%]">
+                <div class="w-auto bg-yellow-100 rounded-2xl p-2 flex flex-col">
+                  <span class="text-[12px] font-medium text-[#b85b2f]">{{item.nameUser}}</span>
+                  <span class="text-[12px] font-medium text-black">{{item.content}}</span>
+                </div>
+                <div class="w-[100%]">
+                  <button (click)="toggleChildComment(item)" class="text-[12px] font-medium text-gray-500">Trả lời</button>
+                  <div *ngIf="item.showChildComment" class="w-[100%] space-x-2 flex items-center justify-center">
+                    <img class="w-[34px] h-[34px] rounded-full" src="{{avatar}}" alt="">
+                    <div class="w-[90%]">
+                      <input [(ngModel)]="contentChildren" (keyup.enter)=" createCommentChildren(item.id,questionDetail.id)" class="w-[100%] p-1.5 text-sm text-white outline-none rounded-lg bg-[#333334] pl-2" type="text" placeholder="Vui lòng nhập bình luận">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-[80%]" *ngFor="let commentChildren of item.listCommentChild">
+              <div class="w-[100%] pl-10 flex space-x-2 mt-2">
+                <img class="w-[32px] h-[32px] object-cover rounded-full" src="{{commentChildren.urlUser}}" alt="">
+                <div class="w-auto bg-yellow-100 rounded-2xl p-2 flex flex-col">
+                  <span class="text-[12px] font-medium text-[#b85b2f]">{{commentChildren.nameUser}}</span>
+                  <span class="text-[12px] font-medium text-black">{{commentChildren.content}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="w-[100%] comment flex items-center justify-center ">
+      <div class="w-[100%] flex p-2 items-center space-x-2">
+        <img class="w-[32px] h-[32px] object-cover rounded-2xl" src="{{avatar}}" alt="">
+        <div class="comment w-[90%] pt-2 pb-2 flex items-center justify-center bg-yellow-100 rounded-lg">
+          <input (keyup.enter)="createCommentQuestion(questionDetail.id)" [(ngModel)]="content" type="text" class="w-[100%] bg-yellow-100 outline-none p-1 pl-3 text-sm text-gray-500 rounded-2xl" placeholder="trả lời bình luận">
+          <button (click)="createCommentQuestion(questionDetail.id)">
+            <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11.5003 12H5.41872M5.24634 12.7972L4.24158 15.7986C3.69128 17.4424 3.41613 18.2643 3.61359 18.7704C3.78506 19.21 4.15335 19.5432 4.6078 19.6701C5.13111 19.8161 5.92151 19.4604 7.50231 18.7491L17.6367 14.1886C19.1797 13.4942 19.9512 13.1471 20.1896 12.6648C20.3968 12.2458 20.3968 11.7541 20.1896 11.3351C19.9512 10.8529 19.1797 10.5057 17.6367 9.81135L7.48483 5.24303C5.90879 4.53382 5.12078 4.17921 4.59799 4.32468C4.14397 4.45101 3.77572 4.78336 3.60365 5.22209C3.40551 5.72728 3.67772 6.54741 4.22215 8.18767L5.24829 11.2793C5.34179 11.561 5.38855 11.7019 5.407 11.8459C5.42338 11.9738 5.42321 12.1032 5.40651 12.231C5.38768 12.375 5.34057 12.5157 5.24634 12.7972Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showSuccessInvoice" class="fixed top-14 right-4 bg-white text-white px-4 py-3 rounded-lg shadow-lg transition-opacity duration-500">
+  <div class="flex items-center">
+    <svg class="w-7 h-7 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#24f547"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8.5 12.5L10.5 14.5L15.5 9.5" stroke="#24f547" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7" stroke="#24f547" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+    <span class="mr-3 text-[14px] text-black">Xóa câu hỏi thành công!!!</span>
+    <div
+      class="h-1 bg-green-500 absolute bottom-0 left-0 transition-all"
+      [style.width.%]="progressWidth">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+<div class="w-[100%] bg-white h-auto p-2 pt-4 pl-4 shadow-sm shadow-gray-500">
+  <div class="header-user-profile border-b-2">
+    <div class="p-2">
+      <span class="text-[20px] font-medium">Tổng quan</span>
+    </div>
+    <div class="header-user-profile-content p-2">
+      <div class="grid grid-cols-4 gap-4 w-full">
+        <div class="flex flex-col space-y-2">
+          <label for="" class="text-sm text-gray-500">Tên đăng nhập</label>
+          <span class="font-medium text-black">{{user?.username}}</span>
+        </div>
+        <div class="flex flex-col space-y-2">
+          <label for="" class="text-sm text-gray-500">Email</label>
+          <span class="font-medium text-black">{{user?.email}}</span>
+        </div>
+        <div class="flex flex-col space-y-2">
+          <label for="" class="text-sm text-gray-500">Họ và tên</label>
+          <span class="font-medium text-black">{{user?.fullName}}</span>
+        </div>
+        <div class="flex flex-col space-y-2">
+          <label for="" class="text-sm text-gray-500">Nhóm khách hàng</label>
+          <span class="font-medium text-black">member</span>
+        </div>
+        <div class="flex flex-col space-y-2">
+          <label for="" class="text-sm text-gray-500">Thú cưng</label>
+          <span class="font-medium text-black">2</span>
+        </div>
+        <div class="flex flex-col space-y-2">
+          <label for="" class="text-sm text-gray-500">Ngày tham gia</label>
+          <span class="font-medium text-black">{{createdDate}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" border-b-2 p-2">
+    <div class="body-user-profile space-y-2 flex items-center">
+      <div class="img-phone w-[40%] space-x-2 p-2 flex items-center border-r-2" (click)="selectFile()">
+        <img [src]="avatar" alt="" class="h-[150px] w-[150px] rounded-full object-cover">
+        <div class="edit-profile p-2 rounded-lg border border-gray-400">
+          <input type="file" id="file-input" class="hidden" (change)="onFileChange($event)" accept="image/*" />
+          <button>Sửa ảnh đại diện</button>
+        </div>
+      </div>
+      <div class="pl-4">
+        <span class="text-gray-400">Vui lòng chọn ảnh nhỏ hơn 5mb</span><br>
+        <span class="text-gray-400">Chọn hình ảnh phù hợp, không phản cảm</span>
+      </div>
+    </div>
+  </div>
+  <div class="profile-user p-4">
+    <span class="font-medium text-[20px] text-black">Thông tin cá nhân</span>
+    <form [formGroup]="updateProfileForm" class="space-y-4" (ngSubmit)="updateProfileUser()">
+      <div class="w-[20%]">
+        <label class="block text-sm font-medium text-gray-700">Họ và tên</label>
+        <input formControlName="fullName" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Họ và tên">
+      </div>
+
+      <!-- Số điện thoại -->
+      <div class="w-[20%]">
+        <label class="block text-sm font-medium text-gray-700">Số điện thoại</label>
+        <input formControlName="numberPhone" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Số điện thoại">
+      </div>
+
+      <!-- Chứng minh nhân dân -->
+      <div class="w-[20%]">
+        <label class="block text-sm font-medium text-gray-700">Chứng minh nhân dân</label>
+        <input formControlName="cmnd" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Chứng minh nhân dân">
+      </div>
+
+      <!-- Giới tính -->
+      <div class="w-[20%]">
+        <label class="block text-sm font-medium text-gray-700">Giới tính</label>
+        <select formControlName="genderUser" class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          <option value="NAM">Nam</option>
+          <option value="NU">Nữ</option>
+        </select>
+      </div>
+
+
+
+      <!-- Số nhà / Đường -->
+      <div class="w-[20%]">
+        <label class="block text-sm font-medium text-gray-700">Số nhà / Đường</label>
+        <input formControlName="address" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Số nhà / Đường">
+      </div>
+      <div class="w-[10%] p-2 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-500">
+        <button  type="submit" [disabled]="updateProfileForm.invalid" class="text-white text-sm text-center">Lưu thông tin</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="showNotification" class="fixed top-5 right-5 bg-white px-4 py-2 rounded-lg shadow-lg">
+  <div class="flex items-center space-x-2">
+    <ion-icon name="checkmark-circle-outline" class="text-green-600 font-medium"></ion-icon>
+    <span class="font-medium text-black">Lưu thông tin thành công</span>
+  </div>
+</div>

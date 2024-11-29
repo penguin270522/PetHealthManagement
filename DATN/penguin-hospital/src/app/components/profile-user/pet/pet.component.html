@@ -1,0 +1,126 @@
+  <div class="space-x-2 flex justify-center">
+    <div *ngIf="showHeaderApp()" class="w-[20%] h-[20%] bg-white rounded-lg border border-gray-300">
+      <ul class="divide-y divide-gray-300">
+        <button (click)="viewAllPet()"><li class="p-2 text-gray-500 hover:text-black">thú cưng của bạn</li></button>
+        <button (click)="viewPetHaveAppointmentActive()"><li class="p-2 text-gray-500 hover:text-black">Thú cưng có lịch khám</li></button>
+        <button (click)="viewPetHaveMedicalReport()"><li class="p-2 text-gray-500 hover:text-black">Thú cưng có lịch tái khám</li></button>
+      </ul>
+    </div>
+    <div class="w-[80%] h-[80%] bg-white rounded-lg p-2 flex justify-center flex-col border border-gray-200" *ngIf="getAllPet">
+      <div class="border-b-2 border-gray-400 flex justify-end" *ngIf="showHeaderApp()">
+        <button [routerLink] = "['create-pet']" class="p-2 hover:text-gray-400 transition-transform transform active:scale-95">
+          <ion-icon name="add-outline"></ion-icon>
+        </button>
+      </div>
+      <div class="w-[100%] h-[100%] bg-white rounded-lg p-2 pt-4 flex flex-col justify-center">
+        <div class="w-[100%]">
+          <router-outlet></router-outlet>
+        </div>
+        <div class="card w-[94%] h-auto grid grid-cols-4 gap-8" *ngIf="shouldShowApp()">
+          <div *ngFor="let petItem of pet" class="w-full h-[100%] rounded-lg bg-white  transform transition-transform duration-300 ease-in-out hover:scale-90">
+            <div class="w-full h-[60%] bg-gray-400 rounded-lg">
+              <a [routerLink]="['/profile-user/pets/pet']" [queryParams]="{ id: petItem.id }">
+                <img *ngIf="petItem.imagePet.length > 0" [src]="'http://localhost:8080/uploads/' + petItem.imagePet[0].url"
+                alt=""
+                class="w-full h-full rounded-t-lg object-cover">
+              </a>
+            </div>
+            <div class="w-full h-[40%] pt-2 bg-gray-200 pl-2 pr-2 rounded-b-lg">
+              <div class="flex justify-between">
+                <div>
+                  <span class="text-sm font-medium hover:text-gray-500">{{petItem.name}}</span>
+                </div>
+                <div>
+                  <button [routerLink]="['/profile-user/pets/pet']" [queryParams]="{ id: petItem.id }"><span class="text-sm font-medium hover:text-gray-500 underline">Xem thêm</span></button>
+                </div>
+              </div>
+              <div class="text-sm text-gray-500">
+                <span>Thông tin thú cưng</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-[80%] h-[80%] bg-white rounded-lg p-2 flex justify-center flex-col border border-gray-200" *ngIf="getPetWithPetHaveAppointment">
+      <div class="w-[100%]">
+        <router-outlet></router-outlet>
+      </div>
+      <div class="notice w-[100%] pt-10 pb-10" *ngIf="notion" >
+        <div class="w-[100%] flex space-x-2">
+          <div class="w-[50%] flex items-center justify-end">
+            <img src="https://i.pinimg.com/564x/86/18/75/861875707e61fef94cd6fe4915b8e0c4.jpg" alt="" class="w-[180px] h-[180px] rounded-2xl  transform transition-transform duration-300 ease-in-out hover:scale-90">
+          </div>
+          <div class="flex items-center justify-start">
+            <span class="font-sans text-[14px] text-gray-900">Thú cưng của bạn vẫn khỏe mạnh nên <br> không có gì cần phải khám cả!!!!</span>
+          </div>
+        </div>
+      </div>
+      <div class="card w-[94%] h-auto grid grid-cols-4 gap-8" *ngIf="shouldShowApp()">
+        <div *ngFor="let petItem of pet" class="w-full h-[100%] rounded-lg bg-white  transform transition-transform duration-300 ease-in-out hover:scale-90">
+          <div class="w-full h-[60%] bg-gray-400 rounded-lg">
+            <a [routerLink]="['/profile-user/pets/pet']" [queryParams]="{id: petItem.id}">
+              <img *ngIf="petItem.imagePet.length > 0" [src]="'http://localhost:8080/uploads/' + petItem.imagePet[0].url"
+              alt=""
+              class="w-full h-full rounded-t-lg object-cover">
+            </a>
+          </div>
+          <div class="w-full h-[40%] pt-2 bg-gray-200 pl-2 pr-2 rounded-b-lg">
+            <div class="flex justify-between">
+              <div>
+                <span class="text-sm font-medium hover:text-gray-500">{{petItem.name}}</span>
+              </div>
+              <div>
+                <button [routerLink]="['/profile-user/pets/pet']" [queryParams]="{ id: petItem.id }"><span class="text-sm font-medium hover:text-gray-500 underline">Xem thêm</span></button>
+              </div>
+            </div>
+            <div class="text-sm text-gray-500">
+              <span>Thông tin thú cưng</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-[80%] h-[80%] bg-white rounded-lg p-2 flex justify-center flex-col border border-gray-200" *ngIf="getPetWithPetHaveMedicalReport">
+      <div class="w-[100%]">
+        <router-outlet></router-outlet>
+      </div>
+      <div class="notice w-[100%] pt-10 pb-10" *ngIf="notion" >
+        <div class="w-[100%] flex space-x-2">
+          <div class="w-[50%] flex items-center justify-end">
+            <img src="https://i.pinimg.com/564x/86/18/75/861875707e61fef94cd6fe4915b8e0c4.jpg" alt="" class="w-[180px] h-[180px] rounded-2xl  transform transition-transform duration-300 ease-in-out hover:scale-90">
+          </div>
+          <div class="flex items-center justify-start">
+            <span class="font-sans text-[14px] text-gray-900">Thú cưng của bạn vẫn khỏe mạnh nên <br> không có gì cần phải khám cả!!!!</span>
+          </div>
+        </div>
+      </div>
+      <div class="card w-[94%] h-auto grid grid-cols-4 gap-8" *ngIf="shouldShowApp()">
+        <div *ngFor="let petItem of pet" class="w-full h-[100%] rounded-lg bg-white  transform transition-transform duration-300 ease-in-out hover:scale-90">
+          <div class="w-full h-[60%] bg-gray-400 rounded-lg">
+            <a [routerLink]="['/profile-user/pets/pet']" [queryParams]="{id: petItem.id}">
+              <img *ngIf="petItem.imagePet.length > 0" [src]="'http://localhost:8080/uploads/' + petItem.imagePet[0].url"
+              alt=""
+              class="w-full h-full rounded-t-lg object-cover">
+            </a>
+          </div>
+          <div class="w-full h-[40%] pt-2 bg-gray-200 pl-2 pr-2 rounded-b-lg">
+            <div class="flex justify-between">
+              <div>
+                <span class="text-sm font-medium hover:text-gray-500">{{petItem.name}}</span>
+              </div>
+              <div>
+                <button [routerLink]="['/profile-user/pets/pet']" [queryParams]="{ id: petItem.id }"><span class="text-sm font-medium hover:text-gray-500 underline">Xem thêm</span></button>
+              </div>
+            </div>
+            <div class="text-sm text-gray-500">
+              <span>Thông tin thú cưng</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

@@ -1,0 +1,25 @@
+<div class="header-body w-[100%] h-full flex items-center justify-center pb-2 flex-col bg-[#fafbfa] pt-2">
+  <div class="w-[80%] h-[20%] bg-white p-2 border-2">
+    <div class="header-body-title w-[100%] h-auto flex items-center pb-2">
+      <img [src]="avatar" class="w-[150px] h-[150px] rounded-full object-cover" alt="">
+      <div class="pl-2">
+        <span class = "text-black font-bold text-[22px]">{{fullName}}</span>
+      </div>
+    </div>
+    <div class="body-title pt-2 border-t border-gray-400 h-[100%]">
+      <ul class = "flex space-x-2 h-[100%]">
+        <a routerLink="profile" class="hover:bg-gray-400 p-2 rounded-lg">Tài khoản<li class=""></li></a>
+        <a routerLink="pets" class="hover:bg-gray-400 p-2 rounded-lg">Thú cưng<li class=""></li></a>
+        <a routerLink="history-order" class="hover:bg-gray-400 p-2 rounded-lg">lịch sử hóa đơn<li class=""></li></a>
+        <a routerLink="security" class="hover:bg-gray-400 p-2 rounded-lg">Mật khẩu và bảo mật<li class=""></li></a>
+        <a routerLink="comment" class="hover:bg-gray-400 p-2 rounded-lg">Phiếu câu hỏi<li class=""></li></a>
+
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="w-[100%] flex justify-center bg-[#fafbfa]">
+  <div class="w-[80%] justify-center pt-2 pb-2">
+    <router-outlet></router-outlet>
+  </div>
+</div>
