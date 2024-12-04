@@ -1,0 +1,27 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+      enabled: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/pethealthymanager
+    username: root
+    password: 2705
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+jwt:
+  signerKey: 6ZG//hTwi/qIlKEYUFUuiEnQPbZI16NTFn9WmZk0lqoVyvyldWc1eWElF13HIwb0
+  expiration: 2592000 #30 days = 30 * 24 * 60 * 60
+
+img:
+  avatarUser: b76b5735-800e-40c3-a3ef-f1250366ff06_136-1363971_author-image-logo-user-png
