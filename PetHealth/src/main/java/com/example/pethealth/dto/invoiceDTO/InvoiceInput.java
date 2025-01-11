@@ -1,5 +1,6 @@
 package com.example.pethealth.dto.invoiceDTO;
 
+import com.example.pethealth.dto.prescriptionDTO.PrescriptionMedicineInput;
 import com.example.pethealth.enums.PaymentMethod;
 import com.example.pethealth.model.ServiceMedical;
 import lombok.*;
@@ -12,6 +13,7 @@ import java.util.List;
 @Builder
 public class InvoiceInput {
     private List<Long> serviceMedicalId;
+    private List<PrescriptionMedicineInput> medicineInputList;
     private Long prescriptionId;
     private Long discountAmount;
     private String note;

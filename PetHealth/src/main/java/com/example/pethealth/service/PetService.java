@@ -2,6 +2,7 @@ package com.example.pethealth.service;
 
 import com.example.pethealth.components.GetPageableUtil;
 import com.example.pethealth.components.MapperDateUtil;
+import com.example.pethealth.dto.appointmentDTO.AppointmentOutPut;
 import com.example.pethealth.dto.outputDTO.BaseDTO;
 import com.example.pethealth.dto.outputDTO.PageDTO;
 import com.example.pethealth.dto.outputDTO.PetDTO;

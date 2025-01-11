@@ -35,7 +35,10 @@ public class WebSecurityConfig {
                                     "api/doctor/createAppointment",
                                     "api/serviceMedical",
                                     "api/typeQuestion/getAllTypeQuestion",
-                                    "api/comment/getAllCommentQuestion/**"
+                                    "api/comment/getAllCommentQuestion/**",
+                                    "api/typePost/getAllTypePost",
+                                    "api/post/getAllPost",
+                                    "api/post/getPostDetails/**"
                             ).permitAll()
                             .requestMatchers(HttpMethod.GET,"api/doctor/**").permitAll()
                             /*.requestMatchers(HttpMethod.POST,"posts").hasRole("ADMIN")*/

@@ -1,7 +1,6 @@
 package com.example.pethealth.dto.output;
 
-import com.example.pethealth.model.Appointment;
-import com.example.pethealth.model.MedicalReport;
+import com.example.pethealth.dto.appointmentDTO.AppointmentOutPut;
 import lombok.*;
 
 import java.util.List;

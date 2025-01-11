@@ -1,4 +1,4 @@
-package com.example.pethealth.dto;
+package com.example.pethealth.dto.appointmentDTO;
 
 public class AppointmentDetailToday {
     private boolean results;

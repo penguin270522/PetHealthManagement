@@ -1,8 +1,9 @@
 package com.example.pethealth.service.parent;
 
-import com.example.pethealth.dto.output.AppointmentOutputDoctor;
+import com.example.pethealth.dto.appointmentDTO.DoctorRepair;
 import com.example.pethealth.dto.outputDTO.AppointmentDTO;
 import com.example.pethealth.dto.outputDTO.AppointmentResponse;
+import com.example.pethealth.dto.outputDTO.BaseDTO;
 import com.example.pethealth.dto.outputDTO.PageDTO;
 import com.example.pethealth.dto.output.ListAppointToDay;
 import com.example.pethealth.model.Appointment;
@@ -19,7 +20,7 @@ public interface IDoctorService {
 
     PageDTO getAppoimentAll(Map<String, String> params) throws BadRequestException;
     Appointment findById(long id);
-    AppointmentDTO repairAppointment(long id, Appointment appointment);
+    AppointmentDTO repairAppointment(long id, DoctorRepair appointment);
 
     AppointmentDTO deleteAppointment(long id);
 
@@ -31,5 +32,9 @@ public interface IDoctorService {
     PageDTO searchNameUser(Map<String,String> params);
 
     PageDTO findByStatus(Map<String, String> params);
+
+    BaseDTO getAppointmentDetails(Long id);
+
+    PageDTO getAppointmentActiveDaily(Map<String , String> params);
 
 }

@@ -2,15 +2,14 @@ package com.example.pethealth.service;
 
 import com.example.pethealth.components.MapperDateUtil;
 import com.example.pethealth.dto.authDTO.UserPetWithMedicalReportOutPut;
-import com.example.pethealth.dto.invoiceDTO.InvoiceBase;
-import com.example.pethealth.dto.invoiceDTO.InvoiceInput;
-import com.example.pethealth.dto.invoiceDTO.InvoiceOutPut;
+import com.example.pethealth.dto.invoiceDTO.*;
 import com.example.pethealth.dto.outputDTO.BaseDTO;
 import com.example.pethealth.dto.outputDTO.PageDTO;
 import com.example.pethealth.enums.InvoiceStatus;
 import com.example.pethealth.enums.PaymentMethod;
 import com.example.pethealth.exception.BadRequestException;
 import com.example.pethealth.model.*;
+import com.example.pethealth.repositories.InvoiceMedicineRepository;
 import com.example.pethealth.repositories.InvoiceRepository;
 import com.example.pethealth.repositories.MedicalRepository;
 import com.example.pethealth.service.parent.IInvoiceService;
@@ -19,6 +18,7 @@ import com.example.pethealth.utils.ConverDateTime;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -28,14 +28,17 @@ public class InvoiceService implements IInvoiceService {
     private final InvoiceRepository invoiceRepository;
     private final MedicalRepository medicalRepository;
     private final ProfileService profileService;
-
+    private final InvoiceMedicineService invoiceMedicineService;
+    private final InvoiceMedicineRepository invoiceMedicineRepository;
     private final InvoiceServiceMedicalService invoiceServiceMedicalService;
 
 
-    public InvoiceService(InvoiceRepository invoiceRepository, MedicalRepository medicalRepository, ProfileService profileService, InvoiceServiceMedicalService invoiceServiceMedicalService) {
+    public InvoiceService(InvoiceRepository invoiceRepository, MedicalRepository medicalRepository, ProfileService profileService, InvoiceMedicineService invoiceMedicineService, InvoiceMedicineRepository invoiceMedicineRepository, InvoiceServiceMedicalService invoiceServiceMedicalService) {
         this.invoiceRepository = invoiceRepository;
         this.medicalRepository = medicalRepository;
         this.profileService = profileService;
+        this.invoiceMedicineService = invoiceMedicineService;
+        this.invoiceMedicineRepository = invoiceMedicineRepository;
         this.invoiceServiceMedicalService = invoiceServiceMedicalService;
     }
 
@@ -44,9 +47,7 @@ public class InvoiceService implements IInvoiceService {
         try {
             MedicalReport medicalReport = medicalRepository.findById(medicalReportId)
                     .orElseThrow(() -> new BadRequestException("Cannot find medical report with id " + medicalReportId));
-
             User doctor = profileService.getLoggedInUser();
-
             Invoice invoice = Invoice.builder()
                     .status(InvoiceStatus.PENDING)
                     .discountAmount(invoiceInput.getDiscountAmount())
@@ -55,26 +56,28 @@ public class InvoiceService implements IInvoiceService {
                     .medicalReport(medicalReport)
                     .paymentMethod(invoiceInput.getPaymentMethod())
                     .build();
+            if(medicalReport.getInvoice() != null){
+                return BaseDTO.builder()
+                        .message("Phiếu khám đã có hóa đơn")
+                        .result(false)
+                        .build();
+            }
             invoiceRepository.save(invoice);
             invoiceInput.getServiceMedicalId().forEach(serviceId ->
                     invoiceServiceMedicalService.createInvoiceServiceMedical(serviceId, invoice.getId())
             );
-
+            invoiceInput.getMedicineInputList().forEach(prescriptionMedicineInput ->
+                    invoiceMedicineService.createInvoiceMedicine(prescriptionMedicineInput, invoice.getId())
+                    );
             long totalServicePrice = invoiceServiceMedicalService.findByInvoiceId(invoice.getId()).stream()
                     .mapToLong(service -> (long) service.getServiceMedical().getFeeService())
                     .sum();
             invoice.setTotalServicePrice(totalServicePrice);
-            if (medicalReport.getPrescription() != null) {
-                invoice.setPrescription(medicalReport.getPrescription());
-                invoice.setTotalPrescription((long) medicalReport.getPrescription().getTotalPrice());
-                long total = invoice.getTotalPrescription() + invoice.getTotalServicePrice() - invoice.getDiscountAmount();
-                invoice.setTotal(total);
-                setInvoiceStatus(invoice, invoiceInput.getAmountReceived());
-                invoice.setAmountReceived(invoiceInput.getAmountReceived());
-                invoiceRepository.save(invoice);
-            }
-            long total = invoice.getTotalServicePrice() - invoice.getDiscountAmount();
+            long totalMedicinePrice = invoiceMedicineRepository.findByInvoiceId(invoice.getId()).stream()
+                    .mapToLong(invoiceMedicine -> (long) invoiceMedicine.getMedicine().getPrice() * invoiceMedicine.getQuantity()).sum();
+            long total = invoice.getTotalServicePrice() + totalMedicinePrice - invoice.getDiscountAmount();
             invoice.setTotal(total);
+            invoice.setTotalPrescription(totalMedicinePrice);
             setInvoiceStatus(invoice, invoiceInput.getAmountReceived());
             invoice.setAmountReceived(invoiceInput.getAmountReceived());
             invoiceRepository.save(invoice);
@@ -164,6 +167,7 @@ public class InvoiceService implements IInvoiceService {
         List<Invoice> items = invoiceRepository.findByDoctorId(id);
         List<InvoiceOutPut> results = items.stream().map(
               invoice -> InvoiceOutPut.builder()
+                      .id(invoice.getId())
                       .code(invoice.getCode())
                       .namePet(invoice.getMedicalReport().getNamePet())
                       .nameDoctor(invoice.getDoctor().getFullName())
@@ -179,6 +183,44 @@ public class InvoiceService implements IInvoiceService {
                 .message("success")
                 .result(true)
                 .invoiceOutPut(results)
+                .build();
+    }
+
+    @Override
+    public BaseDTO invoiceDetails(long invoiceDetailsId) {
+        Invoice invoice = invoiceRepository.findById(invoiceDetailsId).orElseThrow(
+                ()-> new BadRequestException("dont find by id = " + invoiceDetailsId)
+        );
+
+        List<InvoiceMedicineListDTO> results = new ArrayList<>();
+        for(InvoiceMedicine item: invoice.getInvoiceMedicines()){
+            InvoiceMedicineListDTO newItem = new InvoiceMedicineListDTO();
+            newItem.setName(item.getMedicine().getName());
+            newItem.setFee(item.getMedicine().getPrice());
+            newItem.setQuality(item.getQuantity());
+            newItem.setTotalFee(item.getQuantity() * item.getMedicine().getPrice());
+            results.add(newItem);
+        }
+        InvoiceDetails invoiceDetails = InvoiceDetails.builder()
+                .codeInvoice(invoice.getCode())
+                .fullName(invoice.getMedicalReport().getPetOwner())
+                .address(invoice.getMedicalReport().getAddress())
+                .fullNameDoctor(invoice.getDoctor().getFullName())
+                .numberPhone(invoice.getMedicalReport().getNumberPhone())
+                .namePet(invoice.getMedicalReport().getNamePet())
+                .note(invoice.getNote())
+                .invoiceServiceMedicalList(invoice.getInvoiceServiceMedical())
+                .prescriptionMedicineList(results)
+                .totalPrescriptionMedical(invoice.getTotalPrescription())
+                .totalInvoiceServiceMedical(invoice.getTotalServicePrice())
+                .total(invoice.getTotal())
+                .amountReceived(invoice.getAmountReceived())
+                .codeInvoice(invoice.getCode())
+                .build();
+        return BaseDTO.builder()
+                .message("success")
+                .result(true)
+                .object(invoiceDetails)
                 .build();
     }
 }

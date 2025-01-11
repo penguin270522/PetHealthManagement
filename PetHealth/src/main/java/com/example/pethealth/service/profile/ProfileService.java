@@ -42,7 +42,22 @@ public class ProfileService implements IProfileService {
                     .build();
         }
     }
+
+    @Override
+    public BaseDTO getTotalPet() {
+        User user = getLoggedInUser();
+        int totalPet = 0;
+        if(user.getPet() != null){
+            totalPet = user.getPet().size();
+        }
+        return BaseDTO.builder()
+                .result(true).object(totalPet)
+                .build();
+    }
+
     public  User getLoggedInUser() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
+
+
 }

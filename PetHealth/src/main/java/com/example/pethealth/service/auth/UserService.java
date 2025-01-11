@@ -55,13 +55,12 @@ public class UserService implements IUserService {
                            .message("Email exist!").result(false)
                            .build();
                }
-               Role role = roleService.findByCode("ROLE_USER");
+               Role role = roleService.findByCode("ROLE_ADMIN");
                if(role == null){
                    return BaseDTO.builder()
                            .message("dont find by role").result(false)
                            .build();
                }
-
                newUser.setRole(role);
                newUser.setPassword(passwordEncoder.encode(request.getPassword()));
                newUser.setImage(image);
@@ -91,7 +90,6 @@ public class UserService implements IUserService {
                 .orElseThrow(()-> new BadRequestException("dont find by username: " + username));
     }
 
-
     @Override
     public JwtLoginDTO loginUser(LoginDTO request) {
         try{
@@ -119,7 +117,6 @@ public class UserService implements IUserService {
                     .build();
         }
     }
-
     @Override
     public UserResponse findByUserRole(String role) {
         List<UserDTO> userDTOS = new ArrayList<>();
@@ -141,5 +138,144 @@ public class UserService implements IUserService {
                 .build();
     }
 
+    @Override
+    public BaseDTO getAllUser() {
+        List<User> userList = userRepository.findAll();
+        List<UserDTO> results = converUser(userList);
+        return BaseDTO.builder()
+                .result(true).results(results)
+                .build();
+    }
 
+    @Override
+    public BaseDTO findUserName(String fullName) {
+        List<User> userList = userRepository.findByFullName(fullName);
+        List<UserDTO> results = converUser(userList);
+        return BaseDTO.builder()
+                .result(true).results(results)
+                .build();
+    }
+
+    @Override
+    public BaseDTO findUserWithCode(String code) {
+        Role role = roleService.findByCode(code);
+        List<User> userList = userRepository.findByRole(role);
+        List<UserDTO> results = converUser(userList);
+        return BaseDTO.builder()
+                .result(true).results(results)
+                .build();
+    }
+
+    @Override
+    public BaseDTO registerUser(RegisterDTO request) {
+        try{
+            boolean user = userRepository.findByUsernameBoolean(request.getUserName());
+            if(user != true){
+                User newUser = modelMapper.map(request, User.class);
+                PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+                Optional<User> test = userRepository.findByEmail(request.getEmail());
+                Image image = imageService.findByUrl("b76b5735-800e-40c3-a3ef-f1250366ff06_136-1363971_author-image-logo-user-png.png");
+                if(test.isPresent()){
+                    return BaseDTO.builder()
+                            .message("Email exist!").result(false)
+                            .build();
+                }
+                Role role = roleService.findByCode(request.getRole());
+                if(role == null){
+                    return BaseDTO.builder()
+                            .message("dont find by role").result(false)
+                            .build();
+                }
+                newUser.setRole(role);
+                newUser.setFullName(request.getFullName());
+                newUser.setPassword(passwordEncoder.encode(request.getPassword()));
+                newUser.setImage(image);
+                userRepository.save(newUser);
+                return BaseDTO.builder()
+                        .message("success").result(true)
+                        .build();
+            }
+            return BaseDTO.builder()
+                    .message("false").result(false)
+                    .build();
+        }catch (BadRequestException e){
+            return BaseDTO.builder()
+                    .message(e.getMessage()).result(false)
+                    .build();
+        }
+    }
+
+    @Override
+    public BaseDTO updateUser(RegisterDTO registerDTO, Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(
+                ()-> new BadRequestException("dont find by userId")
+        );
+        if(!registerDTO.getRole().isEmpty()){
+            Role role = roleService.findByCode(registerDTO.getRole());
+            user.setRole(role);
+        }
+        if(!registerDTO.getFullName().isEmpty()){
+            user.setFullName(registerDTO.getFullName());
+        }
+        if(!registerDTO.getAddress().isEmpty()){
+            user.setAddress(registerDTO.getAddress());
+        }
+        if(!registerDTO.getPhoneNumber().isEmpty()){
+            user.setAddress(registerDTO.getPhoneNumber());
+        }
+        if(!registerDTO.getEmail().isEmpty()){
+            user.setAddress(registerDTO.getEmail());
+        }
+        userRepository.save(user);
+        return BaseDTO.builder()
+                .message("thay đổi thông tin thành công!!")
+                .result(true)
+                .build();
+    }
+
+    @Override
+    public BaseDTO findByUserWithId(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(
+                ()-> new BadRequestException("dont find by user")
+        );
+        RegisterDTO userOutPut = RegisterDTO.builder()
+                .userName(user.getUsername())
+                .fullName(user.getFullName())
+                .email(user.getEmail())
+                .phoneNumber(user.getPhoneNumber())
+                .role(user.getRole().getName())
+                .address(user.getAddress())
+                .build();
+
+        return BaseDTO.builder()
+                .result(true)
+                .object(userOutPut)
+                .build();
+    }
+
+    public List<UserDTO> converUser(List<User> userList){
+        List<UserDTO> results = new ArrayList<>();
+
+        for(User user : userList){
+            String username = "";
+            if(user.getFullName() != null){
+                username = user.getFullName();
+            }else{
+                username = user.getUsername();
+            }
+            String role = "";
+            if(user.getRole() != null){
+                role = user.getRole().getName();
+            }
+            UserDTO userDTO = UserDTO.builder()
+                    .id(user.getId())
+                    .fullName(username)
+                    .gmail(user.getEmail())
+                    .address(user.getAddress())
+                    .role(role)
+                    .build();
+            results.add(userDTO);
+        }
+        return results;
+    }
 }

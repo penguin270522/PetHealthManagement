@@ -38,4 +38,8 @@ public class ProfileController {
         return profileService.updateProfileUser(userDTO);
     }
 
+    @GetMapping("/getTotalPet")
+    public BaseDTO getTotalPet(){
+        return profileService.getTotalPet();
+    }
 }

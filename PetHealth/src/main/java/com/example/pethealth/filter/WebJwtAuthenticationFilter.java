@@ -76,7 +76,10 @@ public class WebJwtAuthenticationFilter extends OncePerRequestFilter {
                 Pair.of("/api/doctor/createAppointment", "POST"),
                 Pair.of("/api/serviceMedical","GET"),
                 Pair.of("api/typeQuestion/getAllTypeQuestion","GET"),
-                Pair.of("api/comment/getAllCommentQuestion/","GET")
+                Pair.of("api/comment/getAllCommentQuestion/","GET"),
+                Pair.of("api/typePost/getAllTypePost","GET"),
+                Pair.of("api/post/getAllPost", "GET"),
+                Pair.of("api/post/getPostDetails/", "GET")
         );
         for(Pair<String , String> bypassToken : bypassTokens){
             if(request.getServletPath().contains(bypassToken.getFirst()) &&

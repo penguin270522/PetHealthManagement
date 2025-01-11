@@ -26,4 +26,5 @@ public class PrescriptionMedicine extends BaseEntity {
     private String tutorialMedicine;
 
     private Long quantity;
+
 }

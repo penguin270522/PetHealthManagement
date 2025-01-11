@@ -1,7 +1,6 @@
 package com.example.pethealth.controller.admin.doctor;
 
-import com.example.pethealth.dto.output.AppointmentDoctorOutput;
-import com.example.pethealth.dto.output.AppointmentOutputDoctor;
+import com.example.pethealth.dto.appointmentDTO.DoctorRepair;
 import com.example.pethealth.dto.output.ListAppointToDay;
 import com.example.pethealth.dto.output.MedicalReportOutput;
 import com.example.pethealth.dto.outputDTO.*;
@@ -38,6 +37,11 @@ public class DoctorController {
     @GetMapping("/searchAppointmentUserName")
     public PageDTO searchAppointmentName(@RequestParam Map<String,String>params){
         return doctorService.searchNameUser(params);
+    }
+
+    @GetMapping("/getAppointmentDetails/{id}")
+    public BaseDTO getAppointmentDetail(@PathVariable long id){
+        return doctorService.getAppointmentDetails(id);
     }
 
     @GetMapping("/searchAppointmentStatus")
@@ -86,7 +90,7 @@ public class DoctorController {
 
     @PutMapping("/editAppointment/{id}")
     public AppointmentDTO editAppointment(@PathVariable long id,
-                                          @RequestBody Appointment appointment){
+                                          @RequestBody DoctorRepair appointment){
         return doctorService.repairAppointment(id,appointment);
     }
 
@@ -96,6 +100,18 @@ public class DoctorController {
         LocalDate localDateNow = LocalDate.parse(dateNow);
         return doctorService.getAppointmentWithDateNow(params,localDateNow);
     }
+
+    @DeleteMapping("/deleteMedicalReport/{id}")
+    public BaseDTO deleteMedicalReport(@PathVariable Long id){
+        return medicalReportService.deleteMedicalReport(id);
+    }
+
+    @GetMapping("/AppointmentWeek")
+    public PageDTO getAppointmentActiveWithWeek(@RequestParam Map<String, String> params){
+        return doctorService.getAppointmentActiveDaily(params);
+    }
+
+
 
 
 }

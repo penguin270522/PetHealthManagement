@@ -5,12 +5,10 @@ import com.example.pethealth.components.PictureHandle;
 import com.example.pethealth.dto.outputDTO.BaseDTO;
 import com.example.pethealth.dto.outputDTO.ImageDTO;
 import com.example.pethealth.exception.BadRequestException;
-import com.example.pethealth.model.Image;
-import com.example.pethealth.model.Pet;
-import com.example.pethealth.model.Question;
-import com.example.pethealth.model.User;
+import com.example.pethealth.model.*;
 import com.example.pethealth.repositories.ImageRepository;
 import com.example.pethealth.repositories.PetRepository;
+import com.example.pethealth.repositories.PostRepository;
 import com.example.pethealth.repositories.QuestionRepository;
 import com.example.pethealth.repositories.auth.UserRepository;
 import com.example.pethealth.service.parent.IImageService;
@@ -38,6 +36,7 @@ public class ImageService implements IImageService {
     private final ImageAvatarUserUtils imageAvatarUserUtils;
     private final PetRepository petRepository;
     private final QuestionRepository questionRepository;
+    private final PostRepository postRepository;
 
     @Override
     public BaseDTO createImage(MultipartFile files) {
@@ -216,6 +215,43 @@ public class ImageService implements IImageService {
                     .message("Fail: " + e.getMessage())
                     .build();
         }
+    }
+
+    @Override
+    public BaseDTO deleteImagePost(long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(
+                ()-> new BadRequestException("dont find by Post with id " + postId)
+        );
+        List<Image> imageListPost = post.getListImage();
+        if(imageListPost.isEmpty()){
+            imageRepository.deleteAll(imageListPost);
+        }
+        return BaseDTO.builder()
+                .result(true)
+                .message("Success")
+                .build();
+    }
+
+    @Override
+    public BaseDTO createImagePost(List<MultipartFile> files, Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(
+                ()-> new BadRequestException("dont find by Post with id " + postId)
+        );
+        List<Image> imagePost = new ArrayList<>();
+        files = files == null ? new ArrayList<>() : files;
+        for (MultipartFile file : files) {
+            pictureHandle.validateImageInput(file);
+            String filename = pictureHandle.storeFile(file);
+            Image image = Image.builder()
+                    .url(filename).post(post)
+                    .build();
+            imagePost.add(image);
+            imageRepository.save(image);
+        }
+        return BaseDTO.builder()
+                .message("success")
+                .result(true)
+                .build();
     }
 
     @Override

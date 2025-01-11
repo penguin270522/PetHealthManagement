@@ -1,4 +1,4 @@
-package com.example.pethealth.dto.output;
+package com.example.pethealth.dto.appointmentDTO;
 
 import lombok.*;
 

@@ -29,4 +29,7 @@ public class MedicalReportOutput {
     private Date updatedDate;
     private String createBy;
     private String urlPet;
+    private String nameDoctor;
+    private boolean havePrescription = true;
+    private boolean haveInvoice = true;
 }

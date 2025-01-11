@@ -78,12 +78,24 @@ public class AppointmentRepositoryCustomImpl implements AppointmentRepositoryCus
         String nameUser = params.get("nameUser");
         String doctor = params.get("doctorId");
         String fromDay = params.get("fromDay");
+        String namePet = params.get("namePet");
+        String numberPhone = params.get("numberPhone");
         String toDay = params.get("toDay");
+        String toWeek = params.get("toWeek");
+        String toMonth = params.get("toMonth");
+        String codeAppointment = params.get("codeAppointment");
+        if(toWeek != null){
+            sql.append(" and WEEK(a.start_date, 1) = WEEK(CURDATE(), 1) \n" +
+                    "  AND YEAR(a.start_date) = YEAR(CURDATE()) and a.appointment_status = 'ACTIVE'");
+        }
+        if(toMonth != null){
+            sql.append(" and MONTH(a.start_date) = MONTH(CURDATE()) AND YEAR(a.start_date) = YEAR(CURDATE()) and a.appointment_status = 'ACTIVE'");
+        }
         if (fromDay != null && !fromDay.isEmpty() && toDay != null && !toDay.isEmpty()) {
             sql.append(" and a.start_date BETWEEN '")
-                    .append(fromDay)
-                    .append("' AND '")
                     .append(toDay)
+                    .append("' AND '")
+                    .append(fromDay)
                     .append("' ");
         }
         if(statusAppointment != null){
@@ -96,6 +108,10 @@ public class AppointmentRepositoryCustomImpl implements AppointmentRepositoryCus
         }
         if(doctor != null && !doctor.isEmpty()){
             sql.append(String.format(" And a.doctor_id = '%s'", doctor));
+        }
+
+        if(codeAppointment != null && !codeAppointment.isEmpty()){
+            sql.append(String.format(" And a.code = '%s' ",codeAppointment));
         }
         return sql;
     }

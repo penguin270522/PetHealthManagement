@@ -1,4 +1,4 @@
-package com.example.pethealth.dto.output;
+package com.example.pethealth.dto.appointmentDTO;
 
 import lombok.*;
 
@@ -21,4 +21,5 @@ public class AppointmentOutputDoctor {
     private String typeClient;
     private String replayAppointment;
     private String serviceMedical;
+    private DoctorAppointment doctorAppointment;
 }

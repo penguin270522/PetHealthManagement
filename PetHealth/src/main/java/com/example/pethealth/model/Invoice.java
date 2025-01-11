@@ -23,9 +23,15 @@ public class Invoice extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private InvoiceStatus status;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "prescription_id")
     private Prescription prescription;
+
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.REMOVE)
+    private List<InvoiceServiceMedical> invoiceServiceMedical;
+
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.REMOVE)
+    private List<InvoiceMedicine> invoiceMedicines;
 
     private Long amountReceived;
 
