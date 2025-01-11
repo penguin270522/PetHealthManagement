@@ -1,9 +1,11 @@
 package com.example.pethealth.model;
 
 import com.example.pethealth.enums.QuestionStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.Random;
 
 @Getter
@@ -37,6 +39,7 @@ public class Question extends  BaseEntity{
 
     @Column(nullable = false, unique = true)
     private String code;
+
 
     @PrePersist
     public void generateRandomCode() {

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.Random;
 
 @Entity
@@ -23,13 +24,16 @@ public class Prescription  extends BaseEntity{
     @JsonIgnore
     private User doctor;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "medical_report_id")
     @JsonIgnore
     private MedicalReport medicalReport;
 
-    @OneToOne(mappedBy = "prescription", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Invoice invoice;
+//    @OneToOne(mappedBy = "prescription", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Invoice invoice;
+
+    @OneToMany(mappedBy = "prescription", cascade = CascadeType.REMOVE)
+    private List<PrescriptionMedicine> prescriptionMedicine;
 
     private String namePet;
     private Long oldPet;

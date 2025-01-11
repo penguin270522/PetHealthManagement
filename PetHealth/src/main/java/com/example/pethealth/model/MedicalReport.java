@@ -33,6 +33,11 @@ public class MedicalReport extends BaseEntity {
 
     private String weightPet;
 
+    @ManyToOne
+    @JoinColumn(name="doctor_id")
+    @JsonIgnore
+    private User doctor;
+
 
     @Enumerated(EnumType.STRING)
     private GenderPet genderPet;
@@ -44,7 +49,7 @@ public class MedicalReport extends BaseEntity {
     private String address;
 
     @Column(nullable = false, unique = false)
-    //symptom for pet
+
     private String symptom;
 
     @Lob
@@ -62,8 +67,12 @@ public class MedicalReport extends BaseEntity {
     @JsonIgnore
     private Pet pet;
 
-    @OneToOne(mappedBy = "medicalReport")
+    @OneToOne(mappedBy = "medicalReport", cascade = CascadeType.ALL, orphanRemoval = true)
     private Prescription prescription;
+
+    @OneToOne(mappedBy = "medicalReport", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Invoice invoice;
     @PrePersist
     public void generateRandomCode() {
         String letters = getRandomLetters(3);

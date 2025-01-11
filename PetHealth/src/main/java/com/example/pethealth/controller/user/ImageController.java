@@ -50,6 +50,18 @@ public class ImageController {
         return imageService.createImagePet(petId,files);
     }
 
+    @PostMapping(value = "/post/upload/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public BaseDTO uploadImagePost(
+            @PathVariable("id") Long postId,
+            @RequestParam("files") List<MultipartFile> files
+    ){
+        return imageService.createImagePost(files,postId);
+    }
+
+    @DeleteMapping("/post/delete/{id}")
+    private BaseDTO deleteImagePost(@PathVariable("id") Long postId){
+        return imageService.deleteImagePost(postId);
+    }
     @DeleteMapping("/pet/delete/{id}")
     public BaseDTO deleteImagePet(@PathVariable("id") Long petId){
         return imageService.deleteImagePet(petId);

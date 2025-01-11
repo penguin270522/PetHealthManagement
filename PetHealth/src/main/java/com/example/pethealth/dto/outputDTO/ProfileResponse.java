@@ -11,4 +11,5 @@ import lombok.*;
 @Builder
 public class ProfileResponse {
     private User user;
+    private int totalPet;
 }

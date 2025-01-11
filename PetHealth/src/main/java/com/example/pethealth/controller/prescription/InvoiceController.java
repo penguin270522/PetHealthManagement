@@ -30,4 +30,9 @@ public class InvoiceController {
     public InvoiceBase getAllInvocieWithId(@PathVariable Long id){
         return invoiceService.getAllInvoiceWithIdDoctor(id);
     }
+
+    @GetMapping("/invoiceDetail/{id}")
+    public BaseDTO invoiceDetail(@PathVariable long id){
+        return invoiceService.invoiceDetails(id);
+    }
 }

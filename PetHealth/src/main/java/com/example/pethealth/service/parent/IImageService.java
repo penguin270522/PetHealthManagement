@@ -24,5 +24,6 @@ public interface IImageService {
     Image findByUrl(String url);
 
     BaseDTO deleteImagePet(long petId);
-
+    BaseDTO deleteImagePost(long postId);
+    BaseDTO createImagePost(List<MultipartFile> files, Long postId);
 }

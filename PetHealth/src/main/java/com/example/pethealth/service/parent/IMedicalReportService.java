@@ -14,4 +14,6 @@ public interface IMedicalReportService {
     BaseDTO createMedicalReport(MedicalReportDTO medicalReportDTO);
     SimpleResponese<MedicalReportOutput> getAllMedicalReport(Map<String , String> params);
     PageDTO searchMedicalReport(Map<String , String > params);
+
+    BaseDTO deleteMedicalReport(Long medicalReportId);
 }

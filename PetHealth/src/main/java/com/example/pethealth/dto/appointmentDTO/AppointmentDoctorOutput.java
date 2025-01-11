@@ -1,4 +1,4 @@
-package com.example.pethealth.dto.output;
+package com.example.pethealth.dto.appointmentDTO;
 
 import lombok.*;
 
@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AppointmentDoctorOutput {
+    private Long id;
     private String url;
     private String namePet;
     private String dateAppointment;

@@ -50,6 +50,10 @@ public class QuestionRepositoryCustomImpl implements  QuestionRepositoryCustom {
         String user = params.get("UserId");
         String typeQuestion = params.get("typeQuestion");
         String titleQuestion = params.get("titleQuestion");
+        String questionStatus = params.get("questionStatus");
+        if(questionStatus != null && !questionStatus.isEmpty()){
+            sql.append(String.format(" and a.question_status = '%s'", questionStatus));
+        }
         if(doctor != null && !doctor.isEmpty()){
             sql.append(String.format(" and a.doctor_id = '%s'", doctor));
         }
@@ -57,7 +61,7 @@ public class QuestionRepositoryCustomImpl implements  QuestionRepositoryCustom {
             sql.append(String.format(" and a.user_id = '%s'", user));
         }
         if(typeQuestion != null && !typeQuestion.isEmpty()){
-            sql.append(String.format(" and a.type_question_id = '%s'", doctor));
+            sql.append(String.format(" and a.type_question_id = '%s'", typeQuestion));
         }
         if(titleQuestion != null && !titleQuestion.isEmpty()){
             sql.append(String.format(" and a.title LIKE '%%%s%%'",titleQuestion));

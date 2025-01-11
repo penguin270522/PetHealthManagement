@@ -21,4 +21,6 @@ public class QueryConstant {
     public final static String IS_NOT_NULL = " is not null ";
 
     public final static String SELECT_FROM_QUESTION ="select * from question AS a";
+
+    public final static String SELECT_FROM_POST = "select * from post as a";
 }

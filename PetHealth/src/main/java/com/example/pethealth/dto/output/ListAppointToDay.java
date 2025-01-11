@@ -1,5 +1,6 @@
 package com.example.pethealth.dto.output;
 
+import com.example.pethealth.dto.appointmentDTO.AppointmentDoctorOutput;
 import lombok.*;
 
 import java.util.ArrayList;

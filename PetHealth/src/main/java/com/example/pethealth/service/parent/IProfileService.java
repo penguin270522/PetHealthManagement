@@ -9,4 +9,6 @@ public interface IProfileService {
 
     BaseDTO updateProfileUser(UpdateUserDTO userDTO);
 
+    BaseDTO getTotalPet();
+
 }

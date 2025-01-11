@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class InvoiceOutPut {
-
+    private Long id;
     private String code;
     private String fullNameClient;
     private String namePet;

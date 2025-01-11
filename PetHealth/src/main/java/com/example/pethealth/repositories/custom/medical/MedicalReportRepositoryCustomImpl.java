@@ -50,8 +50,12 @@ public class MedicalReportRepositoryCustomImpl implements MedicalReportRepositor
     private StringBuilder buildFilter(Map<String, String> params, StringBuilder sql){
         StringBuilder queryFilter = sql;
         String followSchedule  = params.get("followSchudele");
+        String doctor = params.get("doctorId");
         if (followSchedule != null && !followSchedule.isEmpty()) {
             sql.append(" AND a.follow_schedule ").append(QueryConstant.IS_NOT_NULL);
+        }
+        if(doctor != null && !doctor.isEmpty()){
+            sql.append(String.format(" And a.doctor_id = '%s'", doctor));
         }
         return queryFilter;
     }

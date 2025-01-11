@@ -38,4 +38,7 @@ public class QuestionController {
     public BaseDTO deleteQuestion(@PathVariable long id){
         return questionService.deleteQuestionWithId(id);
     }
+
+
+
 }

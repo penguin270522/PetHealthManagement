@@ -21,5 +21,14 @@ public interface IUserService {
 
     UserResponse findByUserRole(String role);
 
+    BaseDTO getAllUser();
 
+    BaseDTO findUserName(String fullName);
+    BaseDTO findUserWithCode(String code);
+
+    BaseDTO registerUser(RegisterDTO request);
+
+    BaseDTO updateUser(RegisterDTO registerDTO, Long userId);
+
+    BaseDTO findByUserWithId(Long userId);
 }

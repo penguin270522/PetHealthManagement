@@ -14,4 +14,7 @@ public class BaseDTO {
     private boolean result;
     private String url;
     private List<?> results;
+    private Object object;
+    private long totalUser;
+    private Long totalInvoice;
 }

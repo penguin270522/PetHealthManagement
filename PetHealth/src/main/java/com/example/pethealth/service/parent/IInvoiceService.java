@@ -25,4 +25,6 @@ public interface IInvoiceService {
 
     InvoiceBase getAllInvoiceWithIdUser(Long id);
     InvoiceBase getAllInvoiceWithIdDoctor(Long id);
+
+    BaseDTO invoiceDetails(long invoiceDetailsId);
 }
